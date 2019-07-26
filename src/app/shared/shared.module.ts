@@ -1,8 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { PageComponent } from './components/page/page.component';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { PageComponent } from './components/page/page.component'; 
 import { CommonModule } from '@angular/common';
 
 @NgModule({
@@ -10,7 +9,7 @@ import { CommonModule } from '@angular/common';
     PageComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports: [
     PageComponent

@@ -1,0 +1,68 @@
+<app-page class="register">
+    <h1 class="register__title">TASK MONITORING</h1> 
+
+    <form
+        nz-form
+        [formGroup]="form"   
+        (ngSubmit)="submitForm()"
+        class="register__form" 
+    >   
+        <label>Register</label>
+
+        <nz-form-control>
+            <nz-input-group nzPrefixIcon="user">
+                    <input 
+                        id="firstname"
+                        formControlName="firstname"
+                        nz-input placeholder="First Name"
+                    />      
+            </nz-input-group>
+        </nz-form-control>
+        <nz-form-control>
+            <nz-input-group nzPrefixIcon="user">
+                    <input 
+                        id="lastname"
+                        formControlName="lastname"
+                        nz-input placeholder="Last Name"
+                    />      
+            </nz-input-group>
+        </nz-form-control>
+
+        <nz-form-control>
+                <nz-input-group nzPrefixIcon="user">
+                        <input 
+                            id="username"
+                            formControlName="username"
+                            nz-input placeholder="Username"
+                        />      
+                </nz-input-group>
+        </nz-form-control>
+
+
+        <nz-form-control>
+            <nz-input-group nzPrefixIcon="lock">
+                <input 
+                    id="password"
+                    type="password" 
+                    nz-input 
+                    formControlName="password" 
+                    placeholder="Password" />
+            </nz-input-group>
+        </nz-form-control>
+        <nz-form-control>
+            <nz-input-group nzPrefixIcon="lock">
+                <input 
+                    id="confirmPassword"
+                    type="password" 
+                    nz-input 
+                    formControlName="confirmPassword" 
+                    placeholder="Confirm Password" />
+            </nz-input-group>
+        </nz-form-control>
+        
+        <button 
+            nz-button 
+            nzType="primary" 
+            type="submit">Submit</button>   
+    </form>
+</app-page>

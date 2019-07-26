@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { LoginService } from './login.service';
+import { LoginService } from '../login.service';
 import { LoadingService } from 'src/app/shared/components/loading/loading.service';
 import { UtilityService } from 'src/app/shared/services/utility.service';
+import { User } from '../../registration/user.interface';
+import { RegisterService } from '../../registration/register.service';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +35,7 @@ export class LoginComponent implements OnInit {
     this.utilityService.markFormControlsDirty(this.form);
     if (this.form.invalid) {return; }
     this.loginService.authenticationUser({
-      email: this.form.value.username,
+      username: this.form.value.username,
       password: this.form.value.password
     }).subscribe( x => {
       console.log(x);

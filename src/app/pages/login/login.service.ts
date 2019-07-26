@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Credential } from '../credential.interface';
+import { Credential } from './credential.interface';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

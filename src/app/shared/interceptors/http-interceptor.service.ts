@@ -38,7 +38,6 @@ export class HttpInterceptorService implements HttpInterceptor {
       url: `${environment.apiURL}${req.url}`
     });
 
-
     return next.handle(withTokenRequest).pipe(
       // retry(1),
       catchError((error: HttpErrorResponse) => {
