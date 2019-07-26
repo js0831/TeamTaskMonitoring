@@ -6,6 +6,7 @@ import { UtilityService } from 'src/app/shared/services/utility.service';
 import { User } from '../../registration/user.interface';
 import { RegisterService } from '../../registration/register.service';
 import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private loginService: LoginService,
     private utilityService: UtilityService,
-    private router: Router
+    private router: Router,
+    private message: NzMessageService
   ) {
 
     this.form = fb.group({
@@ -39,8 +41,10 @@ export class LoginComponent implements OnInit {
     this.loginService.authenticationUser({
       username: this.form.value.username,
       password: this.form.value.password
-    }).subscribe( x => {
-      console.log(x);
+    }).subscribe( (x: any) => {
+      if (x.status === 'failed') {
+        this.message.create('error', x.message);
+      }
     });
   }
 

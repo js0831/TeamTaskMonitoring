@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RegisterService } from '../register.service';
 import { User } from '../user.interface';
-import { LoginService } from '../../login/login.service';
 import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +17,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private registerService: RegisterService,
-    private router: Router
+    private router: Router,
+    private message: NzMessageService
   ) {
     this.form = fb.group({
       firstname: [null, Validators.required ],
@@ -43,6 +44,9 @@ export class RegisterComponent implements OnInit {
     this.registerService.registerUser(user).subscribe( (res: any) => {
       if (res.status === 'ok') {
         this.form.reset();
+        this.message.create('success', res.message);
+      } else {
+        this.message.create('error', res.message);
       }
     });
   }

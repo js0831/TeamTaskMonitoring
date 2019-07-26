@@ -51,9 +51,9 @@ export class HttpInterceptorService implements HttpInterceptor {
       }),
       finalize(() => {
 
-        setTimeout( () => {
+        // setTimeout( () => {
           this.loading.end();
-        }, 1000);
+        // }, 1000);
 
       }),
       tap((event: HttpEvent<any>) => {
