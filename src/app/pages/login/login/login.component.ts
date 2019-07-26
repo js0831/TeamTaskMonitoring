@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     this.utilityService.markFormControlsDirty(this.form);
     if (this.form.invalid) {return; }
     this.loginService.authenticationUser({
-      username: this.form.value.username,
+      email: this.form.value.username,
       password: this.form.value.password
     }).subscribe( x => {
       console.log(x);

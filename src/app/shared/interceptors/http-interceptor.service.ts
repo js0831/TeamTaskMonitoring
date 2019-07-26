@@ -14,6 +14,7 @@ import {
   HttpErrorResponse
 } from '@angular/common/http';
 import { LoadingService } from '../components/loading/loading.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
@@ -33,7 +34,8 @@ export class HttpInterceptorService implements HttpInterceptor {
     const withTokenRequest = req.clone({
       setHeaders: {
         Authorization : 'Bearer xx.yy.zz'
-      }
+      },
+      url: `${environment.apiURL}${req.url}`
     });
 
 

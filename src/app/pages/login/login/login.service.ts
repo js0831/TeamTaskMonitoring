@@ -12,6 +12,6 @@ export class LoginService {
   ) { }
 
   authenticationUser(credential: Credential) {
-    return this.http.get('https://reqres.in/api/users?page=2');
+    return this.http.post('user/login', credential);
   }
 }
