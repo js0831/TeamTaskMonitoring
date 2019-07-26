@@ -4,6 +4,8 @@ import { RegisterService } from '../register.service';
 import { User } from '../user.interface';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
+import { UtilityService } from 'src/app/shared/services/utility.service';
+import { MustMatch } from 'src/app/shared/validators/password-match.validator';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +20,8 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private registerService: RegisterService,
     private router: Router,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private utitilyService: UtilityService
   ) {
     this.form = fb.group({
       firstname: [null, Validators.required ],
@@ -26,6 +29,8 @@ export class RegisterComponent implements OnInit {
       username: [null, Validators.required ],
       password: [ null, Validators.required],
       confirmPassword: [ null, Validators.required]
+    }, {
+      validator: MustMatch('password', 'confirmPassword')
     });
   }
 
@@ -33,6 +38,15 @@ export class RegisterComponent implements OnInit {
   }
 
   submitForm() {
+    this.utitilyService.markFormControlsDirty(this.form);
+    if (this.form.invalid) {
+      const errors = this.utitilyService.getFormValidationErrors(this.form);
+      const message = errors[0].error === 'mustMatch' ? 'Password not match' : 'Fields Required';
+      this.message.create('error', message);
+      return;
+    }
+
+
     const value = this.form.value;
     const user: User = {
       firstname: value.firstname,
