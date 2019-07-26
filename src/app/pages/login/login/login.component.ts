@@ -5,6 +5,7 @@ import { LoadingService } from 'src/app/shared/components/loading/loading.servic
 import { UtilityService } from 'src/app/shared/services/utility.service';
 import { User } from '../../registration/user.interface';
 import { RegisterService } from '../../registration/register.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private loginService: LoginService,
-    private utilityService: UtilityService
+    private utilityService: UtilityService,
+    private router: Router
   ) {
 
     this.form = fb.group({
@@ -40,5 +42,9 @@ export class LoginComponent implements OnInit {
     }).subscribe( x => {
       console.log(x);
     });
+  }
+
+  register() {
+    this.router.navigate(['register']);
   }
 }

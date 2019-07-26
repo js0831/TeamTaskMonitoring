@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RegisterService } from '../register.service';
 import { User } from '../user.interface';
 import { LoginService } from '../../login/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -16,8 +17,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private registerService: RegisterService,
-    private loginService: LoginService
-
+    private router: Router
   ) {
     this.form = fb.group({
       firstname: [null, Validators.required ],
@@ -45,5 +45,9 @@ export class RegisterComponent implements OnInit {
         this.form.reset();
       }
     });
+  }
+
+  cancel() {
+    this.router.navigate(['login']);
   }
 }
