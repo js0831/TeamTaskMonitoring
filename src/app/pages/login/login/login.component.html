@@ -1,0 +1,38 @@
+<app-page class="login">    
+    
+    <h1 class="login__title">TASK MONITORING</h1> 
+
+    <form
+        nz-form
+        [formGroup]="form"
+        (ngSubmit)="submitLogin()"
+        class="login__form"
+    >
+        <label>LOGIN</label>
+
+        <nz-form-control>
+                <nz-input-group nzPrefixIcon="user">
+                        <input 
+                        formControlName="username"
+                        nz-input placeholder="Username"/>      
+                </nz-input-group>
+        </nz-form-control>
+
+
+        <nz-form-control>
+            <nz-input-group nzPrefixIcon="lock">
+                <input 
+                    type="password" 
+                    nz-input 
+                    formControlName="password" 
+                    placeholder="Password" />
+            </nz-input-group>
+        </nz-form-control>
+        
+        <button 
+            nz-button 
+            nzType="primary" 
+            type="submit">Primary</button>        
+    </form>
+
+</app-page>

@@ -1,0 +1,26 @@
+.login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+
+    &__title{
+        font-weight: normal;
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    &__form{
+        display: grid;
+        grid-gap: .5rem;
+        width: 95%;
+        max-width: 20rem;
+
+        label{
+            font-size: 1rem;
+            border-bottom: 0.1rem dotted #bbb;
+            padding-bottom: .5rem;
+        }
+    }
+}
