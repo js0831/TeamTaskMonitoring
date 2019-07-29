@@ -18,7 +18,6 @@ import { NzInputModule, NzButtonModule, NzFormModule, NzMessageContainerComponen
     FormsModule,
     ReactiveFormsModule,
     RegistrationRoutingModule,
-    NzButtonModule,
     NzFormModule,
     NzInputModule
   ]

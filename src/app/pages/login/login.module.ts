@@ -20,7 +20,6 @@ import {
     FormsModule,
     ReactiveFormsModule,
     LoginRoutingModule,
-    NzButtonModule,
     NzFormModule,
     NzInputModule,
     NzMessageModule
