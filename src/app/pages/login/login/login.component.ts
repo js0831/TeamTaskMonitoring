@@ -10,6 +10,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/shared/app.state';
 import * as actions from '../state/user.actions';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ import * as actions from '../state/user.actions';
 export class LoginComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
+  subs: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -38,7 +40,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.store.select('user').subscribe( (s: any) => {
+    this.subs = this.loginService.selectUser().subscribe( (s: any) => {
       if (s.action === 'USER_LOGIN_FINISH') {
         if (s.status === 'failed') {
           this.message.create('error', s.message);
@@ -53,10 +55,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   submitLogin() {
     this.utilityService.markFormControlsDirty(this.form);
     if (this.form.invalid) {return; }
-    this.store.dispatch(new actions.UserLogin({
+    this.loginService.login({
       username: this.form.value.username,
       password: this.form.value.password
-    }));
+    });
   }
 
   register() {
@@ -64,6 +66,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-
+    this.subs.unsubscribe();
   }
 }

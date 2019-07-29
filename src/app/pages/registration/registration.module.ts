@@ -4,7 +4,7 @@ import { RegisterComponent } from './register/register.component';
 import { RegistrationRoutingModule } from './registration-routing.module'; 
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NzInputModule, NzButtonModule, NzFormModule } from 'ng-zorro-antd';
+import { NzInputModule, NzButtonModule, NzFormModule, NzMessageContainerComponent, NzMessageComponent } from 'ng-zorro-antd';
 
 
 

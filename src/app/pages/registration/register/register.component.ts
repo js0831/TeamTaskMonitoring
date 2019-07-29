@@ -26,9 +26,27 @@ export class RegisterComponent implements OnInit {
     this.form = fb.group({
       firstname: [null, Validators.required ],
       lastname: [null, Validators.required ],
-      username: [null, Validators.required ],
-      password: [ null, Validators.required],
-      confirmPassword: [ null, Validators.required]
+      username: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(5)
+        ]
+      ],
+      password: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(5)
+        ]
+      ],
+      confirmPassword: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(5)
+        ]
+      ],
     }, {
       validator: MustMatch('password', 'confirmPassword')
     });
@@ -41,8 +59,14 @@ export class RegisterComponent implements OnInit {
     this.utitilyService.markFormControlsDirty(this.form);
     if (this.form.invalid) {
       const errors = this.utitilyService.getFormValidationErrors(this.form);
-      const message = errors[0].error === 'mustMatch' ? 'Password not match' : 'Fields Required';
-      this.message.create('error', message);
+      console.log(errors);
+      // const message = errors[0].error === 'mustMatch' ? 'Password not match' : 'Fields Required';
+      // this.message.create('error', message + '<br>' + 'test ');
+
+      errors.forEach( (x) => {
+        this.message.create('error', x.message);
+      });
+
       return;
     }
 

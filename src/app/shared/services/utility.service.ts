@@ -28,15 +28,34 @@ export class UtilityService {
           }
         } else {
           if (controlErrors != null) {
+            console.log(controlErrors);
             Object.keys(controlErrors).forEach(keyError => {
               errors.push({
                 field: key,
-                error: keyError
+                error: keyError,
+                message: this.getFormErrorMessage(key, keyError, controlErrors)
               });
             });
           }
         }
     });
     return errors;
+  }
+
+  getFormErrorMessage(field, errorType, errorData) {
+
+    switch (errorType) {
+      case 'required':
+        return `${field} is required`;
+        break;
+      case 'minlength':
+        return `${field} must be at least ${errorData[errorType].requiredLength} characters long`;
+        break;
+      case 'mustMatch':
+        return `${field} not match`;
+      default:
+        break;
+    }
+
   }
 }
