@@ -13,6 +13,10 @@ import { IconsProviderModule } from './icons-provider.module';
 import { LoadingComponent } from './shared/components/loading/loading.component';
 import { HttpInterceptorService } from './shared/interceptors/http-interceptor.service';
 import { ErrorsHandler } from './shared/interceptors/error-handler.service';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { userReducer } from './pages/login/state/user.reducer';
+import { UserEffects } from './pages/login/state/user.effects';
 
 registerLocaleData(en);
 
@@ -28,7 +32,19 @@ registerLocaleData(en);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    IconsProviderModule
+    IconsProviderModule,
+
+
+    EffectsModule.forRoot(
+      [
+        UserEffects
+      ]
+    ),
+    StoreModule.forRoot(
+      {
+        user: userReducer
+      }
+    )
   ],
   providers: [
     {

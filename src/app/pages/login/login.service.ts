@@ -11,7 +11,7 @@ export class LoginService {
     private http: HttpClient
   ) { }
 
-  authenticationUser(credential: Credential) {
+  authenticateUser(credential: Credential) {
     return this.http.post('user/login', credential);
   }
 }
