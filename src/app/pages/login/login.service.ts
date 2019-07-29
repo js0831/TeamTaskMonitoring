@@ -26,6 +26,16 @@ export class LoginService {
     }));
   }
 
+  isAuthenticated() {
+    return new Promise(
+        (resolve, reject) => {
+            this.selectUser().subscribe((state: any) => {
+                resolve(state.user !== undefined);
+            });
+        }
+    );
+  }
+
   authenticateUser(credential: Credential) {
     return this.http.post('user/login', credential);
   }

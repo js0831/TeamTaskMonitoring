@@ -17,6 +17,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from './pages/login/state/user.reducer';
 import { UserEffects } from './pages/login/state/user.effects';
+import { AuthenticationGuard } from './shared/services/authentication.guard';
 
 registerLocaleData(en);
 
@@ -47,6 +48,7 @@ registerLocaleData(en);
     )
   ],
   providers: [
+    AuthenticationGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,
