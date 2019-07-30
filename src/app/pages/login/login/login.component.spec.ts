@@ -22,6 +22,7 @@ import { of } from 'rxjs';
 import { Component } from '@angular/core';
 import { Routes, Router } from '@angular/router';
 import {Location} from '@angular/common';
+import { PageService } from 'src/app/shared/components/page/page.service';
 
 
 
@@ -40,6 +41,7 @@ describe('LoginComponent', () => {
   let fixture: ComponentFixture<LoginComponent>;
   let dom: Element;
   let loginService: LoginService;
+  let pageService: PageService;
   let location: Location;
   let router: Router;
 
@@ -93,13 +95,15 @@ describe('LoginComponent', () => {
     component = fixture.componentInstance;
     dom = fixture.nativeElement;
     loginService = TestBed.get(LoginService);
-
+    pageService =  TestBed.get(PageService);
 
     spyOn(loginService, 'selectUser').and.returnValue(of({
       firstname: 'Jener',
       lastname: 'Sigua',
       username: 'siguajener'
     }));
+
+    spyOn(pageService, 'pageChanged');
 
     fixture.detectChanges();
   });

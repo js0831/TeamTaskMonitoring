@@ -8,11 +8,13 @@ import { Store } from '@ngrx/store';
 import { RouterTestingModule } from '@angular/router/testing';
 import { LoginService } from '../../login/login.service';
 import { of } from 'rxjs';
+import { PageService } from 'src/app/shared/components/page/page.service';
 
 describe('TaskComponent', () => {
   let component: TaskComponent;
   let fixture: ComponentFixture<TaskComponent>;
   let loginService: LoginService;
+  let pageService: PageService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -38,12 +40,25 @@ describe('TaskComponent', () => {
     fixture = TestBed.createComponent(TaskComponent);
     component = fixture.componentInstance;
     loginService = TestBed.get(LoginService);
+    pageService = TestBed.get(PageService);
 
     spyOn(loginService, 'selectUser').and.returnValue(of({
       firstname: 'Jener',
       lastname: 'Sigua',
       username: 'siguajener'
     }));
+
+    spyOn(pageService, 'selectPage').and.returnValue(of({
+      page: {
+        history: [],
+        currentPage: {
+          id: 'task',
+          path: '/task'
+        }
+      }
+    }));
+
+    spyOn(pageService, 'pageChanged');
 
     fixture.detectChanges();
   });

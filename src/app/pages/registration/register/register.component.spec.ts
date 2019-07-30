@@ -19,6 +19,8 @@ import { of } from 'rxjs';
 import { Routes, Router } from '@angular/router';
 import {Location} from '@angular/common';
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { PageService } from 'src/app/shared/components/page/page.service';
 
 @Component({
   template: `<div>mock</div>`
@@ -34,6 +36,7 @@ describe('RegisterComponent', () => {
   let fixture: ComponentFixture<RegisterComponent>;
   let dom: Element;
   let registerService: RegisterService;
+  let pageService: PageService;
   let location: Location;
   let router: Router;
 
@@ -57,7 +60,10 @@ describe('RegisterComponent', () => {
       ],
       providers: [
         NzMessageService,
-        Overlay
+        Overlay,
+        {
+          provide: Store, useValue: {}
+        }
       ]
     }).overrideModule(
       BrowserDynamicTestingModule,
@@ -82,10 +88,13 @@ describe('RegisterComponent', () => {
     component = fixture.componentInstance;
     dom = fixture.nativeElement;
     registerService = TestBed.get(RegisterService);
+    pageService = TestBed.get(PageService);
 
     spyOn(registerService, 'registerUser').and.returnValue(of({
       status: 'ok'
     }));
+
+    spyOn(pageService, 'pageChanged');
 
     fixture.detectChanges();
   });

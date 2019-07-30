@@ -9,6 +9,7 @@ import { of } from 'rxjs';
 import { Component } from '@angular/core';
 import { Routes, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { PageService } from '../page/page.service';
 
 @Component({
   template: `<div>Mock Component</div>`
@@ -19,11 +20,12 @@ const routes: Routes = [
   {path: 'login', component: MockComponent},
 ];
 
-fdescribe('NavigationComponent', () => {
+describe('NavigationComponent', () => {
   let component: NavigationComponent;
   let fixture: ComponentFixture<NavigationComponent>;
   let dom: Element;
   let loginService: LoginService;
+  let pageService: PageService;
   let location: Location;
   let router: Router;
 
@@ -55,6 +57,7 @@ fdescribe('NavigationComponent', () => {
     component = fixture.componentInstance;
     dom = fixture.nativeElement;
     loginService = TestBed.get(LoginService);
+    pageService = TestBed.get(PageService);
 
     spyOn(loginService, 'selectUser').and.returnValue(of({
       user: {
@@ -65,6 +68,16 @@ fdescribe('NavigationComponent', () => {
     }));
 
     spyOn(loginService, 'logout');
+    spyOn(pageService, 'clearPageData');
+    spyOn(pageService, 'selectPage').and.returnValue(of({
+      page: {
+        history: [],
+        currentPage: {
+          id: 'task',
+          path: '/task'
+        }
+      }
+    }));
 
     fixture.detectChanges();
   });

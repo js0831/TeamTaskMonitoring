@@ -31,7 +31,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
     this.subs[1] = this.pageService.selectPage().subscribe( (state: AppState) => {
       this.currentPage = state.page.current;
-      console.log(state);
     });
   }
 
