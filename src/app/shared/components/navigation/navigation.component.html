@@ -1,9 +1,16 @@
 <div class="navigation">
-    <h2 
-        nz-title
-        *ngIf="user"
-        id="test"
-        class="navigation__name">{{user.firstname}} {{user.lastname}}</h2>
+    
+    <div class="navigation__user">
+        <nz-avatar 
+            nzSrc="https://jenersigua-resume.netlify.com/images/photo.jpg"
+            class="navigation__user-avatar"
+            nzIcon="user"></nz-avatar>
+        <h3 
+            nz-title
+            *ngIf="user"
+            id="test"
+            class="navigation__user-name">{{user.firstname}} {{user.lastname}}</h3>
+    </div>
 
     <ul 
         *ngIf="currentPage"

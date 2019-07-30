@@ -9,6 +9,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { LoginService } from '../../login/login.service';
 import { of } from 'rxjs';
 import { PageService } from 'src/app/shared/components/page/page.service';
+import {
+  NzBadgeComponent,
+  NzTabsModule,
+  NzEmptyModule,
+  NzAvatarModule,
+  NzAddOnModule,
+  NzListModule } from 'ng-zorro-antd';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('TaskComponent', () => {
   let component: TaskComponent;
@@ -21,11 +29,18 @@ describe('TaskComponent', () => {
       declarations: [
         TaskComponent,
         NavigationComponent,
-        PageComponent
+        PageComponent,
+        NzBadgeComponent
       ],
       imports: [
         HttpClientTestingModule,
-        RouterTestingModule
+        RouterTestingModule,
+        NzTabsModule,
+        NzEmptyModule,
+        NzAvatarModule,
+        NzAddOnModule,
+        NzListModule,
+        BrowserAnimationsModule
       ],
       providers: [
         {

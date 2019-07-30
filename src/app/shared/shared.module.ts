@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { PageComponent } from './components/page/page.component';
 import { CommonModule } from '@angular/common';
 import { NavigationComponent } from './components/navigation/navigation.component'; 
-import { NzButtonModule, NzIconModule, NzButtonComponent } from 'ng-zorro-antd';
+import { NzButtonModule, NzIconModule, NzButtonComponent, NzAvatarModule } from 'ng-zorro-antd';
 
 @NgModule({
   declarations: [
@@ -14,12 +14,14 @@ import { NzButtonModule, NzIconModule, NzButtonComponent } from 'ng-zorro-antd';
   imports: [
     CommonModule,
     NzButtonModule,
-    NzIconModule
+    NzIconModule,
+    NzAvatarModule
   ],
   exports: [
     PageComponent,
     NavigationComponent,
-    NzButtonComponent
+    NzButtonComponent,
+    NzIconModule
   ],
   providers: []
 })

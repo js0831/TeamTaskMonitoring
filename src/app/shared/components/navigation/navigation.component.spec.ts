@@ -10,6 +10,7 @@ import { Component } from '@angular/core';
 import { Routes, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { PageService } from '../page/page.service';
+import { NzAvatarModule } from 'ng-zorro-antd';
 
 @Component({
   template: `<div>Mock Component</div>`
@@ -37,7 +38,8 @@ describe('NavigationComponent', () => {
       ],
       imports: [
         HttpClientTestingModule,
-        RouterTestingModule.withRoutes(routes)
+        RouterTestingModule.withRoutes(routes),
+        NzAvatarModule
       ],
       providers: [
         {
@@ -87,7 +89,7 @@ describe('NavigationComponent', () => {
   });
 
   it('should show the user fullname', () => {
-    const el = dom.querySelector('.navigation__name');
+    const el = dom.querySelector('.navigation__user-name');
     expect(el.innerHTML).toBe('Jener Sigua');
   });
 
