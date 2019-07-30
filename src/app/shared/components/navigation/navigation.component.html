@@ -5,15 +5,22 @@
         id="test"
         class="navigation__name">{{user.firstname}} {{user.lastname}}</h2>
 
-    <ul class="navigation__links">
+    <ul 
+        *ngIf="currentPage"
+        class="navigation__links">
         <li> 
-                <!-- nzType="primary"  -->
-            <button nz-button nzType="link" nzSize="small" >
+            <button 
+                *ngIf="currentPage.id !== 'task'"
+                nz-button 
+                nzType="link" 
+                nzSize="small" >
                 <i nz-icon nzType="edit"></i>Task
             </button>
         </li>
         <li> 
-            <button nz-button nzType="link" nzSize="small" >
+            <button 
+                *ngIf="currentPage.id !== 'team'"
+                nz-button nzType="link" nzSize="small" >
                 <i nz-icon nzType="usergroup-add"></i>Team
             </button>
         </li>

@@ -18,6 +18,7 @@ import { StoreModule } from '@ngrx/store';
 import { userReducer } from './pages/login/state/user.reducer';
 import { UserEffects } from './pages/login/state/user.effects';
 import { AuthenticationGuard } from './shared/services/authentication.guard';
+import { pageReducer } from './shared/components/page/state/page.reducer';
 
 registerLocaleData(en);
 
@@ -43,7 +44,8 @@ registerLocaleData(en);
     ),
     StoreModule.forRoot(
       {
-        user: userReducer
+        user: userReducer,
+        page: pageReducer
       }
     )
   ],

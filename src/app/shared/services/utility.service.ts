@@ -43,7 +43,6 @@ export class UtilityService {
   }
 
   getFormErrorMessage(field, errorType, errorData) {
-
     switch (errorType) {
       case 'required':
         return `${field} is required`;
@@ -56,6 +55,5 @@ export class UtilityService {
       default:
         break;
     }
-
   }
 }

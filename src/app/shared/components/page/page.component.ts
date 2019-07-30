@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Location } from '@angular/common';
+import { PageService } from './page.service';
 
 @Component({
   selector: 'app-page',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageComponent implements OnInit {
 
-  constructor() { }
+  @Input() id: string;
+
+  constructor(
+    private location: Location,
+    private pageService: PageService
+  ) { }
 
   ngOnInit() {
+    this.pageService.pageChanged({
+      id: this.id,
+      path: this.location.path()
+    });
   }
 
 }
