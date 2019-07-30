@@ -3,13 +3,8 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { LoginService } from '../login.service';
 import { LoadingService } from 'src/app/shared/components/loading/loading.service';
 import { UtilityService } from 'src/app/shared/services/utility.service';
-import { User } from '../../registration/user.interface';
-import { RegisterService } from '../../registration/register.service';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
-import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/shared/app.state';
-import * as actions from '../state/user.actions';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -27,8 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private loginService: LoginService,
     private utilityService: UtilityService,
     private router: Router,
-    private message: NzMessageService,
-    private store: Store<AppState>
+    private message: NzMessageService
   ) {
 
     this.form = fb.group({

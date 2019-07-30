@@ -28,9 +28,9 @@ import {Location} from '@angular/common';
 @Component({
   template: `<div>mock</div>`
 })
-export class MockComponent {
+class MockComponent {
 }
-export const routes: Routes = [
+const routes: Routes = [
   {path: 'register', component: MockComponent},
 ];
 

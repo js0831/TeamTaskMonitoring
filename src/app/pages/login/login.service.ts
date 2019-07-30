@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { AppState } from 'src/app/shared/app.state';
 import { Store } from '@ngrx/store';
 import * as actions from './state/user.actions';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class LoginService {
     private store: Store<AppState>
   ) { }
 
-  selectUser() {
+  selectUser(): Observable<any> {
     return this.store.select('user');
   }
 
@@ -24,6 +25,10 @@ export class LoginService {
       username: credential.username,
       password: credential.password
     }));
+  }
+
+  logout() {
+    this.store.dispatch(new actions.UserLogout());
   }
 
   isAuthenticated() {
