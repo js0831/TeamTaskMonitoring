@@ -7,9 +7,9 @@ const routes: Routes = [
   { path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule) },
   { path: 'register', loadChildren: () => import('./pages/registration/registration.module').then(m => m.RegistrationModule) },
   {
-    path: 'dashboard',
+    path: 'task',
     canActivate: [ AuthenticationGuard ],
-    loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule)
+    loadChildren: () => import('./pages/task/task.module').then(m => m.TaskModule)
   },
 ];
 

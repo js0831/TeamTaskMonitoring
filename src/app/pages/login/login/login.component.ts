@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         if (s.status === 'failed') {
           this.message.create('error', s.message);
         } else {
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['task']);
         }
       }
     });

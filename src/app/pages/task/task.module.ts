@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { DashboardRoutingModule } from './dashboard-routing.module';
+import { TaskComponent } from './task/task.component';
+import { TaskRoutingModule } from './task-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    TaskComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
-    DashboardRoutingModule
+    TaskRoutingModule
   ]
 })
-export class DashboardModule { }
+export class TaskModule { }

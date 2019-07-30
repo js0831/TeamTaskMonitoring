@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DashboardComponent } from './dashboard.component';
+import { TaskComponent } from './task.component';
 import { NavigationComponent } from 'src/app/shared/components/navigation/navigation.component';
 import { PageComponent } from 'src/app/shared/components/page/page.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -9,15 +9,15 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { LoginService } from '../../login/login.service';
 import { of } from 'rxjs';
 
-describe('DashboardComponent', () => {
-  let component: DashboardComponent;
-  let fixture: ComponentFixture<DashboardComponent>;
+describe('TaskComponent', () => {
+  let component: TaskComponent;
+  let fixture: ComponentFixture<TaskComponent>;
   let loginService: LoginService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        DashboardComponent,
+        TaskComponent,
         NavigationComponent,
         PageComponent
       ],
@@ -35,7 +35,7 @@ describe('DashboardComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DashboardComponent);
+    fixture = TestBed.createComponent(TaskComponent);
     component = fixture.componentInstance;
     loginService = TestBed.get(LoginService);
 
