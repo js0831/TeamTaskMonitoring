@@ -72,7 +72,7 @@ describe('NavigationComponent', () => {
     spyOn(pageService, 'selectPage').and.returnValue(of({
       page: {
         history: [],
-        currentPage: {
+        current: {
           id: 'task',
           path: '/task'
         }
@@ -97,16 +97,22 @@ describe('NavigationComponent', () => {
     expect(location.path()).toBe('/login');
   }));
 
-  // it('should redirect to team page upon clicking team link button', () => {
-  //   expect(false).toBeTruthy();
-  // });
+  it('should hide the task link button when the active page is task', () => {
+    const el = dom.querySelector('.navigation__link__task');
+    expect(el).toBe(null);
+  });
 
-  // it('should hide the task link button when the active page is task', () => {
-  //   expect(false).toBeTruthy();
-  // });
+  it('should show the team link button when the active page is task', () => {
+    const el = dom.querySelector('.navigation__link__team');
+    expect(el != null).toBeTruthy();
+  });
 
-  // it('should hide the team link button when the active page is team', () => {
-  //   expect(false).toBeTruthy();
-  // });
+  it('should redirect to team page upon clicking team link button', () => {
+    expect(false).toBeTruthy();
+  });
+
+
+
+
 
 });

@@ -13,14 +13,20 @@
                 *ngIf="currentPage.id !== 'task'"
                 nz-button 
                 nzType="link" 
-                nzSize="small" >
+                nzSize="small" 
+                class="navigation__link__task"
+            >
                 <i nz-icon nzType="edit"></i>Task
             </button>
         </li>
         <li> 
             <button 
                 *ngIf="currentPage.id !== 'team'"
-                nz-button nzType="link" nzSize="small" >
+                nz-button 
+                nzType="link" 
+                nzSize="small" 
+                class="navigation__link__team"
+            >
                 <i nz-icon nzType="usergroup-add"></i>Team
             </button>
         </li>
