@@ -1,0 +1,26 @@
+.date-selection{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height:3rem;
+    padding: 0 1rem;
+
+
+    &__date{
+        display: flex;
+        align-items: center;
+        h4{
+            margin: 0 .5rem 0 0;
+        }
+    }
+
+    *{
+        cursor: pointer;
+    }
+}
+
+nz-date-picker{
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}

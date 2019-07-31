@@ -1,0 +1,29 @@
+<div class="date-selection">
+
+    <button 
+        class="previous-date"
+        (click)="changeDate(-1)" 
+        nz-button 
+        nzShape="circle"
+        nzType="default">
+        <i nz-icon nzType="left"></i>
+    </button>
+    
+    <div class="date-selection__date">
+        <h4>{{date | date : dateFormat}}</h4>
+        <i nz-icon nzType="calendar" nzTheme="twotone"></i>
+ 
+        <nz-date-picker [(ngModel)]="date" [nzFormat]="dateFormat"></nz-date-picker>
+    </div>
+ 
+    
+    <button 
+        class="next-date"
+        (click)="changeDate(1)" 
+        nz-button 
+        nzShape="circle"
+        nzType="default">
+        <i nz-icon nzType="right"></i>
+    </button>
+
+</div>

@@ -17,6 +17,7 @@ import {
   NzAddOnModule,
   NzListModule } from 'ng-zorro-antd';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TaskDateSelectionComponent } from '../task-date-selection/task-date-selection.component';
 
 describe('TaskComponent', () => {
   let component: TaskComponent;
@@ -30,7 +31,8 @@ describe('TaskComponent', () => {
         TaskComponent,
         NavigationComponent,
         PageComponent,
-        NzBadgeComponent
+        NzBadgeComponent,
+        TaskDateSelectionComponent
       ],
       imports: [
         HttpClientTestingModule,
