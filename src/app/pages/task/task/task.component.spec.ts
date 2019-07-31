@@ -23,16 +23,19 @@ import {
   NzSpinComponent,
   NzSpinModule,
   NzIconDirective,
-  NzIconModule} from 'ng-zorro-antd';
+  NzIconModule,
+  NzMessageService,
+  NzMessageComponent,
+  NzMessageContainerComponent} from 'ng-zorro-antd';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TaskDateSelectionComponent } from '../task-date-selection/task-date-selection.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TaskActionComponent } from '../task-action/task-action.component';
 import { TaskFormComponent } from '../task-form/task-form.component';
 import { TaskService } from '../task.service';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 
-fdescribe('TaskComponent', () => {
+describe('TaskComponent', () => {
   let component: TaskComponent;
   let fixture: ComponentFixture<TaskComponent>;
   let loginService: LoginService;
@@ -48,7 +51,9 @@ fdescribe('TaskComponent', () => {
         NzBadgeComponent,
         TaskDateSelectionComponent,
         TaskActionComponent,
-        TaskFormComponent
+        TaskFormComponent,
+        NzMessageComponent,
+        NzMessageContainerComponent
       ],
       imports: [
         HttpClientTestingModule,
@@ -65,14 +70,28 @@ fdescribe('TaskComponent', () => {
         NzInputModule,
         NzModalModule,
         NzIconModule,
-        BrowserDynamicTestingModule
+        BrowserDynamicTestingModule,
+        FormsModule,
+        ReactiveFormsModule
       ],
       providers: [
         {
           provide: Store
-        }
+        },
+        NzMessageService
       ]
     })
+    .overrideModule(
+      BrowserDynamicTestingModule,
+      {
+        set: {
+          entryComponents: [
+            NzMessageComponent,
+            NzMessageContainerComponent
+          ]
+        }
+      }
+    )
     .compileComponents();
   }));
 
@@ -100,8 +119,8 @@ fdescribe('TaskComponent', () => {
     }));
 
     spyOn(pageService, 'pageChanged');
-    spyOn(taskService, 'loadUserTask');
-    spyOn(taskService, 'selectTask').and.returnValue(of(
+    spyOn(taskService, 'storeLoadUserTask');
+    spyOn(taskService, 'storeSelectTask').and.returnValue(of(
       {
         action: 'TASK_LOAD_FINISH',
         status: 'ok',
