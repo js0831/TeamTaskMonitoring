@@ -20,6 +20,15 @@ export function taskReducer(state = initialAppState, action: actions.Actions) {
                 status: payload.status,
                 message: payload.message
             };
+
+        case actions.TASK_ADD_FINISH:
+            return {
+                ...state,
+                action: 'TASK_ADD_FINISH',
+                task: [...state.task, payload.data],
+                status: payload.status,
+                message: payload.message
+            };
         default:
             return{
                 ...state,

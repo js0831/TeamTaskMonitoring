@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TaskService } from '../task.service';
 import { AppState } from 'src/app/shared/app.state';
 import { LoginService } from '../../login/login.service';
 import { User } from '../../registration/user.interface';
 import { Task } from '../task.interface';
+import { Subscription } from 'rxjs';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss']
 })
-export class TaskComponent implements OnInit {
+export class TaskComponent implements OnInit, OnDestroy {
 
   isShowTaskForm = false;
   currentUser: User;
@@ -26,31 +28,45 @@ export class TaskComponent implements OnInit {
     { title: 'On Hold', icon: 'pause-circle', badgeColor: '#f56622', data: [] }
   ];
   selectedTask: Task;
+  subs: Subscription[] = [];
 
   constructor(
     private taskService: TaskService,
-    private loginService: LoginService
+    private message: NzMessageService
   ) {
-    this.currentUser = this.loginService.getCurrentUser();
+    this.currentUser = LoginService.getCurrentUser();
   }
 
   ngOnInit() {
-    this.taskService.loadUserTask(this.currentUser.id);
+    this.taskService.storeLoadUserTask(this.currentUser.id);
 
-    this.taskService.selectTask().subscribe((state: AppState) => {
-      if (state.action === 'TASK_LOAD_FINISH') {
-        console.log(JSON.stringify(state));
+    this.subs[0] = this.taskService.storeSelectTask().subscribe((state: AppState) => {
+      if (
+        state.action === 'TASK_LOAD_FINISH' ||
+        state.action === 'TASK_ADD_FINISH'
+      ) {
+        this.userTask.forEach( (x) => x.data = []);
         state.task.forEach( (x: Task) => {
           // tslint:disable-next-line: radix
           const stat = x.status;
-          console.log(x);
           this.userTask[stat].data.push(x);
         });
+
+        if (state.action === 'TASK_ADD_FINISH') {
+          setTimeout(x => {
+            this.message.create('success', 'Success');
+          }, 500);
+          this.taskService.storeActionClear();
+        }
       }
     });
   }
 
   selectask(task: Task) {
     this.selectedTask = task;
+  }
+
+  ngOnDestroy() {
+    this.subs.forEach(x => x.unsubscribe());
   }
 }

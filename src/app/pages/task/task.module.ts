@@ -31,7 +31,8 @@ import { TaskFormComponent } from './task-form/task-form.component';
     NzMenuModule,
     NzModalModule,
     NzFormModule,
-    NzInputModule
+    NzInputModule,
+    ReactiveFormsModule
   ]
 })
 export class TaskModule { }

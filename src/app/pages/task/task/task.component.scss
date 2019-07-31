@@ -24,4 +24,9 @@
         align-items: center;
         justify-content: space-between;
     }
+
+    &__list-container{
+        height: calc(100vh - 15rem);
+        overflow: auto;
+    }
 }

@@ -18,6 +18,10 @@ export class LoginService {
     private store: Store<AppState>
   ) { }
 
+  static getCurrentUser(): User {
+    return LocalStorageService.get('user') || {};
+  }
+
   selectUser(): Observable<any> {
     return this.store.select('user');
   }
@@ -45,9 +49,5 @@ export class LoginService {
 
   authenticateUser(credential: Credential) {
     return this.http.post('user/login', credential);
-  }
-
-  getCurrentUser(): User {
-    return LocalStorageService.get('user') || {};
   }
 }

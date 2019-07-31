@@ -18,10 +18,20 @@ export class TaskEffects {
     @Effect() taskLoad: Observable<Action> = this.actions$.pipe(
         ofType(actions.TASK_LOAD),
         switchMap((action: actions.TaskLoad) => {
-            alert(action.payload);
             return this.taskService.getUserTask(action.payload).pipe(
                 map((result) => {
                     return new actions.TaskLoadFinish(result);
+                })
+            );
+        })
+    );
+
+    @Effect() taskAdd: Observable<Action> = this.actions$.pipe(
+        ofType(actions.TASK_ADD),
+        switchMap((action: actions.TaskAdd) => {
+            return this.taskService.addTask(action.payload).pipe(
+                map((result) => {
+                    return new actions.TaskAddFinish(result);
                 })
             );
         })
