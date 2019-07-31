@@ -16,6 +16,7 @@ export function userReducer(state = initialAppState, action: actions.Actions) {
         case actions.USER_LOGIN_FINISH:
             const data = payload.data || {};
             const user: User = {
+                id: data._id,
                 username: data.username,
                 firstname: data.firstname,
                 lastname: data.lastname,

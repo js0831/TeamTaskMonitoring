@@ -15,6 +15,7 @@ import {
 } from '@angular/common/http';
 import { LoadingService } from '../components/loading/loading.service';
 import { environment } from 'src/environments/environment';
+import { LocalStorageService } from '../services/local-storage.service';
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
@@ -31,9 +32,10 @@ export class HttpInterceptorService implements HttpInterceptor {
 
     this.loading = this.loading || this.injector.get(LoadingService);
     this.loading.start();
+    const user = LocalStorageService.get('user') || {token: ''};
     const withTokenRequest = req.clone({
       setHeaders: {
-        Authorization : 'Bearer xx.yy.zz'
+        Authorization : `Bearer ${user.token}`
       },
       url: `${environment.apiURL}${req.url}`
     });

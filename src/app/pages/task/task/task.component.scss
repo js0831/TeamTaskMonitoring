@@ -10,4 +10,18 @@
         height: calc(100vh - 9rem);
         border-radius: .2rem;
     } 
+
+    &__add-button{
+        position: absolute;
+        bottom: 2rem;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+    
+    nz-list-item{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 }

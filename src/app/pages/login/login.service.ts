@@ -5,6 +5,8 @@ import { AppState } from 'src/app/shared/app.state';
 import { Store } from '@ngrx/store';
 import * as actions from './state/user.actions';
 import { Observable } from 'rxjs';
+import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
+import { User } from '../registration/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +45,9 @@ export class LoginService {
 
   authenticateUser(credential: Credential) {
     return this.http.post('user/login', credential);
+  }
+
+  getCurrentUser(): User {
+    return LocalStorageService.get('user') || {};
   }
 }

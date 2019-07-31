@@ -19,6 +19,8 @@ import { userReducer } from './pages/login/state/user.reducer';
 import { UserEffects } from './pages/login/state/user.effects';
 import { AuthenticationGuard } from './shared/services/authentication.guard';
 import { pageReducer } from './shared/components/page/state/page.reducer';
+import { taskReducer } from './pages/task/state/task.reducer';
+import { TaskEffects } from './pages/task/state/task.effects';
 
 registerLocaleData(en);
 
@@ -39,13 +41,15 @@ registerLocaleData(en);
 
     EffectsModule.forRoot(
       [
-        UserEffects
+        UserEffects,
+        TaskEffects
       ]
     ),
     StoreModule.forRoot(
       {
         user: userReducer,
-        page: pageReducer
+        page: pageReducer,
+        task: taskReducer
       }
     )
   ],

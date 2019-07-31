@@ -8,66 +8,52 @@
 
     <div class="task__tab-wrapper">
         <nz-tabset 
-            class="task__tab"
-            nzTabPosition="top" 
-            nzSize="small"
-            nzType="card"
-        >
-            <nz-tab [nzTitle]="todoTitleTemplate">
-                    <ng-template #todoTitleTemplate> 
-                        <i nz-icon nzType="tool"></i> todo
-                        <nz-badge nzCount="5"></nz-badge>
-                    </ng-template>
-    
-                    <div class="task__list-container">
-                        <nz-list nzSize="small"> 
-                                <nz-list-item>A</nz-list-item> 
-                                <nz-list-item>B</nz-list-item> 
-                                <nz-list-item>C</nz-list-item>                                 
-                        </nz-list>
-                    </div>
-    
-            </nz-tab>
-            <nz-tab [nzTitle]="onGoingTitleTemplate">
-                    <ng-template #onGoingTitleTemplate> 
-                        <i nz-icon nzType="sync" nzSpin="true"></i> On-going
-                        <nz-badge nzCount="5" [nzStyle]="{ backgroundColor: '#5590fd' }"></nz-badge> 
-                    </ng-template>
-    
-                <nz-empty></nz-empty>
-            </nz-tab>
-            
-            <nz-tab [nzTitle]="doneTitleTemplate">
-                    <ng-template #doneTitleTemplate> 
-                            <i nz-icon nzType="check-circle"></i> Done
-                            <nz-badge nzCount="5" [nzStyle]="{ backgroundColor: '#52c41a' }"></nz-badge> 
-                    </ng-template>
-    
-                    <div class="task__list-container">
-                        <nz-list nzSize="small"> 
-                                <nz-list-item>A</nz-list-item> 
-                                <nz-list-item>B</nz-list-item> 
-                                <nz-list-item>C</nz-list-item>                                 
-                        </nz-list>
-                    </div>
-            </nz-tab> 
-    
-            <nz-tab [nzTitle]="holdTitleTemplate">   
-                    <ng-template #holdTitleTemplate> 
-                            <i nz-icon nzType="pause-circle"></i> On Hold
-                            <nz-badge nzCount="5" [nzStyle]="{ backgroundColor: '#f56622' }"></nz-badge> 
-                    </ng-template>
-    
-                    <div class="task__list-container">
-                            <nz-list nzSize="small"> 
-                                    <nz-list-item>A</nz-list-item> 
-                                    <nz-list-item>B</nz-list-item> 
-                                    <nz-list-item>C</nz-list-item>                                 
-                            </nz-list>
-                    </div>    
-            </nz-tab> 
-        </nz-tabset>
+                class="task__tab"
+                nzTabPosition="top" 
+                nzSize="small"
+                nzType="card"
+		>
+			<nz-tab 
+				*ngFor="let u of userTask"
+				[nzTitle]="todoTitleTemplate">
+				<ng-template #todoTitleTemplate> 
+					<i nz-icon [nzSpin]="u.icon === 'sync'" [nzType]="u.icon"></i> {{u.title}}
+					<nz-badge [nzCount]="u.data.length" [nzStyle]="{ backgroundColor: u.badgeColor }"></nz-badge>
+				</ng-template>
+
+				<div class="task__list-container">
+					<nz-list nzSize="small"> 
+							<nz-list-item 
+								(click)="selectask(ut)"
+								*ngFor="let ut of u.data">
+								{{ut.title}} 
+								
+								<app-task-action
+									*ngIf="selectedTask && ut._id === selectedTask._id"
+								></app-task-action>
+
+							</nz-list-item>                           
+					</nz-list>
+				</div> 
+			</nz-tab> 
+        </nz-tabset> 
     </div>
-    
+
+	<button 
+		(click)="isShowTaskForm=true"
+		nz-button 
+		nzType="primary" 
+		nzSize="large" 
+		nzShape="circle"
+		class="task__add-button"
+	>
+		<i nz-icon nzType="plus"></i>
+	</button>    
+
+	<app-task-form
+		*ngIf="isShowTaskForm"
+		(closed)="isShowTaskForm = false"
+	></app-task-form>
+
 </app-page>
 
