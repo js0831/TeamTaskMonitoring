@@ -21,8 +21,8 @@ export class TaskService {
     return this.store.select('task');
   }
 
-  storeLoadUserTask(userId: string) {
-    this.store.dispatch(new actions.TaskLoad(userId));
+  storeLoadUserTask(payload: { userId: string, date: string } ) {
+    this.store.dispatch(new actions.TaskLoad(payload));
   }
 
   storeAddUserTask(task: Task) {
@@ -34,8 +34,8 @@ export class TaskService {
   }
 
   // HTTP REQUEST
-  getUserTask(userId: string) {
-    return this.http.get(`user/tasks/${userId}`);
+  getUserTask(params: { userId: string, date: string }) {
+    return this.http.get(`user/tasks/${params.userId}/date/${params.date}`);
   }
 
   addTask(task: Task) {

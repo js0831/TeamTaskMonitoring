@@ -7,6 +7,7 @@ import { LoginService } from '../../login/login.service';
 import { AppState } from 'src/app/shared/app.state';
 import { Subscription } from 'rxjs';
 import { UtilityService } from 'src/app/shared/services/utility.service';
+import { DateSelectionService } from 'src/app/shared/components/date-selection/date-selection.service';
 
 @Component({
   selector: 'app-task-form',
@@ -19,11 +20,13 @@ export class TaskFormComponent implements OnInit, OnDestroy {
   show = false;
   form: FormGroup;
   subs: Subscription[] = [];
+  date: string;
 
   constructor(
     private fb: FormBuilder,
     private taskService: TaskService,
-    private utilityService: UtilityService
+    private utilityService: UtilityService,
+    private dateSelectionService: DateSelectionService
   ) { }
 
   ngOnInit() {
@@ -32,6 +35,10 @@ export class TaskFormComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({
       title: [null, Validators.required],
       description: [null]
+    });
+
+    this.subs[0] = this.dateSelectionService.storeSelectDate().subscribe( (x: AppState) => {
+      this.date = x.date;
     });
   }
 
@@ -49,7 +56,8 @@ export class TaskFormComponent implements OnInit, OnDestroy {
       title: this.form.value.title,
       description: this.form.value.description,
       status: 0,
-      user: LoginService.getCurrentUser().id
+      user: LoginService.getCurrentUser().id,
+      date: this.date
     };
 
     this.taskService.storeAddUserTask(newTask);

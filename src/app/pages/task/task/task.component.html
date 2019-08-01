@@ -42,6 +42,7 @@
     </div>
 
 	<button 
+		*ngIf="!isPreviousDate()"
 		(click)="isShowTaskForm=true"
 		nz-button 
 		nzType="primary" 
@@ -50,7 +51,7 @@
 		class="task__add-button"
 	>
 		<i nz-icon nzType="plus"></i>
-	</button>    
+	</button>
 
 	<app-task-form
 		*ngIf="isShowTaskForm"

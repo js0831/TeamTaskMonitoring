@@ -6,6 +6,7 @@ import { User } from '../../registration/user.interface';
 import { Task } from '../task.interface';
 import { Subscription } from 'rxjs';
 import { NzMessageService } from 'ng-zorro-antd';
+import { DateSelectionService } from 'src/app/shared/components/date-selection/date-selection.service';
 
 @Component({
   selector: 'app-task',
@@ -29,17 +30,21 @@ export class TaskComponent implements OnInit, OnDestroy {
   ];
   selectedTask: Task;
   subs: Subscription[] = [];
+  date: any;
 
   constructor(
     private taskService: TaskService,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private dateSelectionService: DateSelectionService
   ) {
     this.currentUser = LoginService.getCurrentUser();
   }
 
   ngOnInit() {
-    this.taskService.storeLoadUserTask(this.currentUser.id);
+    this.loadSubscriptions();
+  }
 
+  private loadSubscriptions() {
     this.subs[0] = this.taskService.storeSelectTask().subscribe((state: AppState) => {
       if (
         state.action === 'TASK_LOAD_FINISH' ||
@@ -60,6 +65,15 @@ export class TaskComponent implements OnInit, OnDestroy {
         }
       }
     });
+    this.subs[1] = this.dateSelectionService.storeSelectDate().subscribe( (x: AppState) => {
+      if (x.action === 'DATE_CHANGED') {
+        this.taskService.storeLoadUserTask({
+          userId: this.currentUser.id,
+          date: x.date
+        });
+        this.date = x.date;
+      }
+    });
   }
 
   selectask(task: Task) {
@@ -68,5 +82,11 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subs.forEach(x => x.unsubscribe());
+  }
+
+  isPreviousDate() {
+    const currentDate = new Date(new Date().toDateString());
+    const selectedDate = new Date(new Date(this.date).toDateString());
+    return currentDate > selectedDate;
   }
 }

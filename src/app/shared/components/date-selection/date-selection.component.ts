@@ -20,6 +20,12 @@ export class DateSelectionComponent implements OnInit {
     this.dateSectionService.storeChangeDate(this.date);
   }
 
+  datePickerSelect() {
+    setTimeout(() => {
+      this.dateSectionService.storeChangeDate(this.date);
+    });
+  }
+
   changeDate(inc: number) {
     const newDate = new Date(this.date);
     this.date = new Date(newDate.setDate(newDate.getDate() + inc));

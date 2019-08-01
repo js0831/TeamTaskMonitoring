@@ -123,12 +123,16 @@ describe('TaskComponent', () => {
 
     spyOn(pageService, 'pageChanged');
     spyOn(dateSelectionService, 'storeChangeDate');
+    spyOn(dateSelectionService, 'storeSelectDate').and.returnValue(of({
+      date: new Date()
+    }));
     spyOn(taskService, 'storeLoadUserTask');
     spyOn(taskService, 'storeSelectTask').and.returnValue(of(
       {
         action: 'TASK_LOAD_FINISH',
         status: 'ok',
         message: 'success',
+        date: new Date(),
         task: [
           {
             _id: '5d4123a23d0f543334636b4f',
@@ -197,8 +201,35 @@ describe('TaskComponent', () => {
     expect(badges[3].querySelector('.current').innerText).toBe('1');
   });
 
+  it('should show only the add button when current and future date', () => {
+    component.date = new Date();
+    fixture.detectChanges();
+    let btn = fixture.nativeElement.querySelector('.task__add-button');
+    expect(btn != null).toBeTruthy();
+    expect(!component.isPreviousDate()).toBeTruthy();
+
+    component.date = new Date('07/31/2019');
+    fixture.detectChanges();
+    btn = fixture.nativeElement.querySelector('.task__add-button');
+    expect(btn).toBe(null);
+    expect(component.isPreviousDate()).toBeTruthy();
+  });
+
   it('should update the view when new task is added', () => {
-    expect(false).toBeTruthy();
+    const currentLength = fixture.nativeElement.querySelectorAll('nz-list-item').length;
+    component.userTask[0].data.push(
+      {
+        _id: '5d4123a23d0f543334636b4f',
+        user: '5d3ab6b1ec5c10a9b85a362b',
+        title: 'test',
+        description: 'test desc',
+        status: 0,
+        date: '2019-07-31T05:14:10.750Z'
+      }
+    );
+    fixture.detectChanges();
+    const newLength = fixture.nativeElement.querySelectorAll('nz-list-item').length;
+    expect(newLength - currentLength).toBe(1);
   });
 
   // it('should move the task to on going tab when an todo task is change status to todo', () => {

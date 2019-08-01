@@ -13,7 +13,9 @@
         <h4>{{date | date : dateFormat}}</h4>
         <i nz-icon nzType="calendar" nzTheme="twotone"></i>
  
-        <nz-date-picker [(ngModel)]="date" [nzFormat]="dateFormat"></nz-date-picker>
+        <nz-date-picker 
+            (ngModelChange)="datePickerSelect()"
+            [(ngModel)]="date" [nzFormat]="dateFormat"></nz-date-picker>
     </div>
  
     

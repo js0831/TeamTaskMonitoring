@@ -140,4 +140,10 @@ describe('LoginComponent', () => {
     expect(location.path()).toBe('/register');
   }));
 
+  it('should redirect task page when login is successfull', fakeAsync(() => {
+    // component.register();
+    // tick();
+    expect(false).toBeTruthy();
+  }));
+
 });
