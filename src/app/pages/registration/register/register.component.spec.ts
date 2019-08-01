@@ -21,6 +21,7 @@ import {Location} from '@angular/common';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { PageService } from 'src/app/shared/components/page/page.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   template: `<div>mock</div>`
@@ -56,7 +57,8 @@ describe('RegisterComponent', () => {
         ReactiveFormsModule,
         NzInputModule,
         NzFormModule,
-        NzAddOnModule
+        NzAddOnModule,
+        BrowserAnimationsModule
       ],
       providers: [
         NzMessageService,

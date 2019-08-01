@@ -12,7 +12,10 @@ import {
   NzMenuModule,
   NzModalModule,
   NzFormModule,
-  NzInputModule
+  NzInputModule,
+  NzDropDownModule,
+  NzButtonModule,
+  NzDividerModule
 } from 'ng-zorro-antd';
 import { DateSelectionComponent } from '../../shared/components/date-selection/date-selection.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -38,11 +41,13 @@ import { TaskFormComponent } from './task-form/task-form.component';
     NzListModule,
     NzBadgeModule,
     NzDatePickerModule,
-    NzMenuModule,
     NzModalModule,
     NzFormModule,
     NzInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NzDropDownModule,
+    NzButtonModule,
+    NzDividerModule
   ]
 })
 export class TaskModule { }

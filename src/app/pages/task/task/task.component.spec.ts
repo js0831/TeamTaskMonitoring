@@ -26,7 +26,9 @@ import {
   NzIconModule,
   NzMessageService,
   NzMessageComponent,
-  NzMessageContainerComponent} from 'ng-zorro-antd';
+  NzMessageContainerComponent,
+  NzDropDownModule,
+  NzButtonModule} from 'ng-zorro-antd';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DateSelectionComponent } from '../../../shared/components/date-selection/date-selection.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -74,7 +76,9 @@ describe('TaskComponent', () => {
         NzIconModule,
         BrowserDynamicTestingModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NzDropDownModule,
+        NzButtonModule
       ],
       providers: [
         {

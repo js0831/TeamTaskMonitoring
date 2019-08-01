@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TaskStatus } from '../task-status.enum';
 
 @Component({
   selector: 'app-task-action',
@@ -12,4 +13,11 @@ export class TaskActionComponent implements OnInit {
   ngOnInit() {
   }
 
+  action(type: string) {
+    console.log(type);
+  }
+
+  status(type: TaskStatus) {
+    console.log(type);
+  }
 }

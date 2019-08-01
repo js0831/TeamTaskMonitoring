@@ -1,9 +1,6 @@
 <app-page id="task" class="task">
-    <app-navigation></app-navigation> 
-    <!-- <br>
-    <br> -->
-
-    <!-- CREATE COMPONENT -->
+	<app-navigation></app-navigation>  
+	
     <app-date-selection></app-date-selection> 
 
     <div class="task__tab-wrapper">
@@ -22,17 +19,18 @@
 				</ng-template>
 
 				<div class="task__list-container">
-					<nz-list nzSize="small"> 
+					<nz-list nzSize="small">  
 							<nz-list-item 
+								[ngClass]="{'selected' : selectedTask && ut._id === selectedTask._id}"
 								(click)="selectask(ut)"
 								*ngFor="let ut of u.data">
 								{{ut.title}} 
 								
 								<app-task-action
 									*ngIf="selectedTask && ut._id === selectedTask._id"
-								></app-task-action>
+								></app-task-action> 
+							</nz-list-item>        
 
-							</nz-list-item>                           
 					</nz-list>
 
 					<nz-empty *ngIf="u.data.length === 0"></nz-empty>

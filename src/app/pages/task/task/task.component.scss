@@ -23,6 +23,13 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        padding: .5rem;
+        transition: all .1s ease-in;
+
+        &.selected{
+            background: #eee;
+            border-radius: .20rem;
+        }
     }
 
     &__list-container{
