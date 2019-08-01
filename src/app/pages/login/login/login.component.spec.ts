@@ -13,7 +13,6 @@ import {
 } from 'ng-zorro-antd';
 import { PageComponent } from 'src/app/shared/components/page/page.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { By } from 'protractor';
 import { Overlay } from '@angular/cdk/overlay';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { Store } from '@ngrx/store';
@@ -23,6 +22,7 @@ import { Component } from '@angular/core';
 import { Routes, Router } from '@angular/router';
 import {Location} from '@angular/common';
 import { PageService } from 'src/app/shared/components/page/page.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -33,6 +33,7 @@ class MockComponent {
 }
 const routes: Routes = [
   {path: 'register', component: MockComponent},
+  {path: 'task', component: MockComponent},
 ];
 
 describe('LoginComponent', () => {
@@ -54,7 +55,8 @@ describe('LoginComponent', () => {
         NzButtonModule,
         NzFormModule,
         NzInputModule,
-        NzAddOnModule
+        NzAddOnModule,
+        BrowserAnimationsModule
       ],
       declarations: [
         LoginComponent,
@@ -98,12 +100,17 @@ describe('LoginComponent', () => {
     pageService =  TestBed.get(PageService);
 
     spyOn(loginService, 'selectUser').and.returnValue(of({
-      firstname: 'Jener',
-      lastname: 'Sigua',
-      username: 'siguajener'
+      status: 'ok',
+      action: 'USER_LOGIN_FINISH',
+      user: {
+        firstname: 'Jener',
+        lastname: 'Sigua',
+        username: 'siguajener'
+      }
     }));
-
+    spyOn(loginService, 'login');
     spyOn(pageService, 'pageChanged');
+
 
     fixture.detectChanges();
   });
@@ -141,9 +148,16 @@ describe('LoginComponent', () => {
   }));
 
   it('should redirect task page when login is successfull', fakeAsync(() => {
-    // component.register();
-    // tick();
-    expect(false).toBeTruthy();
+    component.ngOnInit();
+    component.form.patchValue({
+      username: 'sigujener',
+      password: '12312312'
+    });
+    fixture.detectChanges();
+    component.submitLogin();
+    tick();
+    fixture.detectChanges();
+    expect(location.path()).toBe('/task');
   }));
 
 });
