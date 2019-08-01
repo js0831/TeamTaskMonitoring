@@ -3,6 +3,7 @@ import {
     HttpErrorResponse
 } from '@angular/common/http';
 import { NzMessageService } from 'ng-zorro-antd';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class ErrorsHandler implements ErrorHandler {
@@ -24,9 +25,8 @@ export class ErrorsHandler implements ErrorHandler {
                 console.log('no internet');
                 message = 'No Internet Connection';
             } else {
-                console.log(error.status);
-                console.log(error.message);
-                message = `${error.status} ${error.message}`;
+                message = `${error.status} ${error.error.message}`;
+                console.log(error);
             }
         } else {
             console.log(error);
@@ -35,5 +35,6 @@ export class ErrorsHandler implements ErrorHandler {
         }
 
         this.message.create('error', message);
+        setTimeout( x => { this.injector.get(Router).navigate(['/']); }, 2000);
     }
 }
