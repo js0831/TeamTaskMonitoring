@@ -22,12 +22,9 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { PageService } from 'src/app/shared/components/page/page.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MockComponent } from 'src/app/shared/components/mock/mock.component';
 
-@Component({
-  template: `<div>mock</div>`
-})
-export class MockComponent {
-}
+
 export const routes: Routes = [
   {path: 'login', component: MockComponent},
 ];

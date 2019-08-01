@@ -23,14 +23,8 @@ import { Routes, Router } from '@angular/router';
 import {Location} from '@angular/common';
 import { PageService } from 'src/app/shared/components/page/page.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MockComponent } from 'src/app/shared/components/mock/mock.component';
 
-
-
-@Component({
-  template: `<div>mock</div>`
-})
-class MockComponent {
-}
 const routes: Routes = [
   {path: 'register', component: MockComponent},
   {path: 'task', component: MockComponent},

@@ -5,11 +5,13 @@ import { PageComponent } from './components/page/page.component';
 import { CommonModule } from '@angular/common';
 import { NavigationComponent } from './components/navigation/navigation.component'; 
 import { NzButtonModule, NzIconModule, NzButtonComponent, NzAvatarModule } from 'ng-zorro-antd';
+import { MockComponent } from './components/mock/mock.component';
 
 @NgModule({
   declarations: [
     PageComponent,
-    NavigationComponent
+    NavigationComponent,
+    MockComponent
   ],
   imports: [
     CommonModule,

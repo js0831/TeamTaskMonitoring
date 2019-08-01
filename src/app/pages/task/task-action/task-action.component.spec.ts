@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TaskActionComponent } from './task-action.component';
-import { NzDropDownModule, NzButtonModule } from 'ng-zorro-antd';
+import { NzDropDownModule, NzButtonModule, NzDividerModule } from 'ng-zorro-antd';
 
 describe('TaskActionComponent', () => {
   let component: TaskActionComponent;
@@ -12,7 +12,8 @@ describe('TaskActionComponent', () => {
       declarations: [ TaskActionComponent ],
       imports: [
         NzDropDownModule,
-        NzButtonModule
+        NzButtonModule,
+        NzDividerModule
       ]
     })
     .compileComponents();

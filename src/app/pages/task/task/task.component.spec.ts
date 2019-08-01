@@ -28,7 +28,8 @@ import {
   NzMessageComponent,
   NzMessageContainerComponent,
   NzDropDownModule,
-  NzButtonModule} from 'ng-zorro-antd';
+  NzButtonModule,
+  NzDividerModule} from 'ng-zorro-antd';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DateSelectionComponent } from '../../../shared/components/date-selection/date-selection.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -78,7 +79,8 @@ describe('TaskComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         NzDropDownModule,
-        NzButtonModule
+        NzButtonModule,
+        NzDividerModule
       ],
       providers: [
         {

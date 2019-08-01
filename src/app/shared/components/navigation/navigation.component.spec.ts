@@ -11,12 +11,8 @@ import { Routes, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { PageService } from '../page/page.service';
 import { NzAvatarModule } from 'ng-zorro-antd';
+import { MockComponent } from '../mock/mock.component';
 
-@Component({
-  template: `<div>Mock Component</div>`
-})
-class MockComponent {
-}
 const routes: Routes = [
   {path: 'login', component: MockComponent},
 ];
