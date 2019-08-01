@@ -34,6 +34,7 @@ import { TaskActionComponent } from '../task-action/task-action.component';
 import { TaskFormComponent } from '../task-form/task-form.component';
 import { TaskService } from '../task.service';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { DateSelectionService } from 'src/app/shared/components/date-selection/date-selection.service';
 
 describe('TaskComponent', () => {
   let component: TaskComponent;
@@ -41,6 +42,7 @@ describe('TaskComponent', () => {
   let loginService: LoginService;
   let pageService: PageService;
   let taskService: TaskService;
+  let dateSelectionService: DateSelectionService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -101,6 +103,7 @@ describe('TaskComponent', () => {
     loginService = TestBed.get(LoginService);
     pageService = TestBed.get(PageService);
     taskService = TestBed.get(TaskService);
+    dateSelectionService = TestBed.get(DateSelectionService);
 
     spyOn(loginService, 'selectUser').and.returnValue(of({
       firstname: 'Jener',
@@ -119,6 +122,7 @@ describe('TaskComponent', () => {
     }));
 
     spyOn(pageService, 'pageChanged');
+    spyOn(dateSelectionService, 'storeChangeDate');
     spyOn(taskService, 'storeLoadUserTask');
     spyOn(taskService, 'storeSelectTask').and.returnValue(of(
       {

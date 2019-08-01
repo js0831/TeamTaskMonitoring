@@ -2,11 +2,14 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DateSelectionComponent } from './date-selection.component';
 import { FormsModule } from '@angular/forms';
-import { NzDatePickerModule } from 'ng-zorro-antd';
+import { NzDatePickerModule, DateHelperService } from 'ng-zorro-antd';
+import { Store } from '@ngrx/store';
+import { DateSelectionService } from './date-selection.service';
 
 describe('DateSelectionComponent', () => {
   let component: DateSelectionComponent;
   let fixture: ComponentFixture<DateSelectionComponent>;
+  let dateSelectionService: DateSelectionService;
   let dom: any;
 
   beforeEach(async(() => {
@@ -15,6 +18,11 @@ describe('DateSelectionComponent', () => {
       imports: [
         FormsModule,
         NzDatePickerModule
+      ],
+      providers: [
+        {
+          provide: Store
+        }
       ]
     })
     .compileComponents();
@@ -24,6 +32,10 @@ describe('DateSelectionComponent', () => {
     fixture = TestBed.createComponent(DateSelectionComponent);
     component = fixture.componentInstance;
     dom = fixture.nativeElement;
+    dateSelectionService = TestBed.get(DateSelectionService);
+
+    spyOn(dateSelectionService, 'storeChangeDate');
+
     fixture.detectChanges();
   });
 
