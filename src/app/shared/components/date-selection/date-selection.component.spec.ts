@@ -1,17 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TaskDateSelectionComponent } from './task-date-selection.component';
+import { DateSelectionComponent } from './date-selection.component';
 import { FormsModule } from '@angular/forms';
 import { NzDatePickerModule } from 'ng-zorro-antd';
 
-describe('TaskDateSelectionComponent', () => {
-  let component: TaskDateSelectionComponent;
-  let fixture: ComponentFixture<TaskDateSelectionComponent>;
+describe('DateSelectionComponent', () => {
+  let component: DateSelectionComponent;
+  let fixture: ComponentFixture<DateSelectionComponent>;
   let dom: any;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TaskDateSelectionComponent ],
+      declarations: [ DateSelectionComponent ],
       imports: [
         FormsModule,
         NzDatePickerModule
@@ -21,7 +21,7 @@ describe('TaskDateSelectionComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TaskDateSelectionComponent);
+    fixture = TestBed.createComponent(DateSelectionComponent);
     component = fixture.componentInstance;
     dom = fixture.nativeElement;
     fixture.detectChanges();

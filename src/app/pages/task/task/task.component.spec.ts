@@ -15,7 +15,7 @@ import {
   NzEmptyModule,
   NzAvatarModule,
   NzAddOnModule,
-  NzListModule, 
+  NzListModule,
   NzDatePickerModule,
   NzFormModule,
   NzInputModule,
@@ -28,7 +28,7 @@ import {
   NzMessageComponent,
   NzMessageContainerComponent} from 'ng-zorro-antd';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TaskDateSelectionComponent } from '../task-date-selection/task-date-selection.component';
+import { DateSelectionComponent } from '../../../shared/components/date-selection/date-selection.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TaskActionComponent } from '../task-action/task-action.component';
 import { TaskFormComponent } from '../task-form/task-form.component';
@@ -49,7 +49,7 @@ describe('TaskComponent', () => {
         NavigationComponent,
         PageComponent,
         NzBadgeComponent,
-        TaskDateSelectionComponent,
+        DateSelectionComponent,
         TaskActionComponent,
         TaskFormComponent,
         NzMessageComponent,

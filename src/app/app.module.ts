@@ -21,6 +21,7 @@ import { AuthenticationGuard } from './shared/services/authentication.guard';
 import { pageReducer } from './shared/components/page/state/page.reducer';
 import { taskReducer } from './pages/task/state/task.reducer';
 import { TaskEffects } from './pages/task/state/task.effects';
+import { dateReducer } from './shared/components/date-selection/state/date-selection.reducer';
 
 registerLocaleData(en);
 
@@ -49,7 +50,8 @@ registerLocaleData(en);
       {
         user: userReducer,
         page: pageReducer,
-        task: taskReducer
+        task: taskReducer,
+        date: dateReducer
       }
     )
   ],
