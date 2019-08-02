@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/shared/app.state';
 import * as actions from './state/task.actions';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Task } from './task.interface';
 
 @Injectable({
@@ -11,10 +11,20 @@ import { Task } from './task.interface';
 })
 export class TaskService {
 
+  private events = new Subject<{action: string, data?: any}>();
+
   constructor(
     private http: HttpClient,
     private store: Store<AppState>
   ) { }
+
+  taskEvents() {
+    return this.events;
+  }
+
+  callTaskEvent(event: {action: string, data?: any}) {
+    this.events.next(event);
+  }
 
   // STORE ACCESS
   storeSelectTask(): Observable<any> {
@@ -27,6 +37,14 @@ export class TaskService {
 
   storeAddUserTask(task: Task) {
     this.store.dispatch(new actions.TaskAdd(task));
+  }
+
+  storeUpdateUserTask(task: Task) {
+    this.store.dispatch(new actions.TaskUpdate(task));
+  }
+
+  storeSelectUserTask(task: Task) {
+    this.store.dispatch(new actions.TaskSelect(task));
   }
 
   storeDeleteUserTask(id: string) {
@@ -44,6 +62,10 @@ export class TaskService {
 
   addTask(task: Task) {
     return this.http.post('task', task);
+  }
+
+  updateTask(task: Task) {
+    return this.http.put(`task/${task._id}`, task);
   }
 
   deleteTask(id: string) {

@@ -16,11 +16,13 @@ import { DateSelectionService } from 'src/app/shared/components/date-selection/d
 })
 export class TaskFormComponent implements OnInit, OnDestroy {
 
-  @Output() closed = new EventEmitter<boolean>();
   show = false;
   form: FormGroup;
   subs: Subscription[] = [];
   date: string;
+  selectedTask: Task;
+  title = '';
+  formType = '';
 
   constructor(
     private fb: FormBuilder,
@@ -30,37 +32,89 @@ export class TaskFormComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    setTimeout( x => { this.show = true; }, 250);
-
-    this.form = this.fb.group({
-      title: [null, Validators.required],
-      description: [null]
-    });
 
     this.subs[0] = this.dateSelectionService.storeSelectDate().subscribe( (x: AppState) => {
       this.date = x.date;
     });
+
+    this.subs[1] = this.taskService.taskEvents().subscribe(x => {
+      if ( [
+            'ADD_TASK',
+            'VIEW_TASK',
+            'EDIT_TASK'
+          ].indexOf(x.action) >= 0
+      ) {
+        this.formType = x.action;
+        this.show = true;
+        this.buildForm();
+        this.buildTitle();
+      }
+    });
+
+    this.subs[2] = this.taskService.storeSelectTask().subscribe( (x: AppState) => {
+      if (x.action === 'TASK_SELECT') {
+        this.selectedTask = x.selectedTask;
+      }
+    });
+  }
+
+  buildTitle() {
+    switch (this.formType) {
+      case 'ADD_TASK':
+        this.title = 'Add New Task';
+        break;
+
+      case 'EDIT_TASK':
+        this.title = `Edit Task : ${this.selectedTask.title}`;
+        break;
+
+      case 'VIEW_TASK':
+            this.title = `Task : ${this.selectedTask.title}`;
+            break;
+      default:
+        break;
+    }
+  }
+
+  buildForm() {
+    let group = {
+      id: [],
+      title: [],
+      description: []
+    };
+    if ( this.formType !== 'ADD_TASK' ) {
+      group = {
+        id: [this.selectedTask._id, Validators.required],
+        title: [this.selectedTask.title, Validators.required],
+        description: [this.selectedTask.description]
+      };
+    }
+    this.form = this.fb.group(group);
   }
 
   handleCancel() {
     this.show = false;
-    setTimeout( x => {
-      this.closed.emit(true);
-    }, 500);
   }
 
   submit() {
     this.utilityService.markFormControlsDirty(this.form);
     if (this.form.invalid) {return; }
+    const value = this.form.value;
     const newTask: Task = {
-      title: this.form.value.title,
-      description: this.form.value.description,
-      status: 0,
+      _id: value.id,
+      title: value.title,
+      description: value.description,
+      status: this.formType === 'ADD_TASK' ? 0 : this.selectedTask.status,
       user: LoginService.getCurrentUser().id,
       date: this.date
     };
 
-    this.taskService.storeAddUserTask(newTask);
+    if ( this.formType === 'ADD_TASK' ) {
+      this.taskService.storeAddUserTask(newTask);
+    } else {
+      this.taskService.storeUpdateUserTask(newTask);
+    }
+
     this.handleCancel();
   }
 

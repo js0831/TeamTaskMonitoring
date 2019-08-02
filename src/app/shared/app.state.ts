@@ -10,6 +10,7 @@ export interface AppState {
 
     user?: User;
     task?: Task[];
+    selectedTask?: Task;
     date?: string;
     page?: {
         history?: Page[],

@@ -2,6 +2,7 @@ import { Action } from '@ngrx/store';
 import * as actions from './task.actions';
 import { AppState } from 'src/app/shared/app.state';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
+import { Task } from '../task.interface';
 
 const initialAppState: AppState = {
     action: 'initial',
@@ -30,6 +31,20 @@ export function taskReducer(state = initialAppState, action: actions.Actions) {
                 message: payload.message
             };
 
+        case actions.TASK_UPDATE_FINISH:
+
+                const foundIndex = state.task.findIndex( (x: Task) => x._id === payload.data._id);
+                const clone = Object.assign([], state.task);
+                clone[foundIndex] = payload.data;
+
+                return {
+                    ...state,
+                    action: 'TASK_UPDATE_FINISH',
+                    task: clone,
+                    status: payload.status,
+                    message: payload.message
+                };
+
         case actions.TASK_DELETE_FINISH:
             return {
                 ...state,
@@ -38,6 +53,15 @@ export function taskReducer(state = initialAppState, action: actions.Actions) {
                 status: payload.status,
                 message: payload.message
             };
+
+        case actions.TASK_SELECT:
+                return {
+                    ...state,
+                    action: 'TASK_SELECT',
+                    selectedTask: payload,
+                    status: '',
+                    message: ''
+                };
         default:
             return{
                 ...state,

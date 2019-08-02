@@ -1,33 +1,56 @@
-<nz-modal [nzVisible]="show" nzTitle="Add new task" (nzOnCancel)="handleCancel()">
-        <div>
+<nz-modal [nzVisible]="show" [nzTitle]="title" (nzOnCancel)="handleCancel()">
+        <p><strong>Date:</strong> {{date | date : 'MMMM, d yyyy'}}</p>
+        
+        <div *ngIf="formType !== 'VIEW_TASK'"> 
           <form 
+            *ngIf="form"
             [formGroup]="form"
             nz-form
           >
-                <nz-form-item>
-                  Date: {{date | date : 'MMMM, d yyyy'}}
-                </nz-form-item>
                 <nz-form-item>
                     <nz-form-control>
                       <input 
                           id="title"
                           formControlName="title"
                           nz-input placeholder="Title"
-                      />
+                      /> 
                     </nz-form-control>
                 </nz-form-item>
-                    <textarea
-                        formControlName="description" 
-                        nz-input
-                        placeholder="Description"
-                        [nzAutosize]="{ minRows: 4, maxRows: 6 }"
-                    ></textarea>
+                <textarea
+                    formControlName="description" 
+                    nz-input
+                    placeholder="Description"
+                    [nzAutosize]="{ minRows: 4, maxRows: 6 }"
+                ></textarea>
           </form>
         </div>
+
+        <div 
+          class="task-view"
+          *ngIf="formType === 'VIEW_TASK'">
+            <div>
+              <p>
+                  <strong>Title: </strong>{{selectedTask.title}}
+              </p>
+
+              <p>
+                  <strong>Status: </strong>{{['Todo','On Going','Done','On Hold'][selectedTask.status]}}
+              </p>
+            </div> 
+            <div><strong>Description: </strong>{{selectedTask.description}}</div>
+        </div>
+        
+        
         <div *nzModalFooter>
           <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
-          <button nz-button nzType="primary" (click)="submit()">Submit</button>
+          <button 
+            *ngIf="formType !== 'VIEW_TASK'"
+            nz-button 
+            nzType="primary" 
+            (click)="submit()"> {{formType === 'ADD_TASK' ? 'SAVE' : 'UPDATE'}}
+          </button>
         </div>
+
 </nz-modal>
 <!-- 
 <nz-modal nzVisible="true" nzTitle="Add new task" (nzOnCancel)="handleCancel()">

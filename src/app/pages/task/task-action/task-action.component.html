@@ -17,6 +17,10 @@
 
 <nz-dropdown-menu #actionMenu="nzDropdownMenu">
 		<ul nz-menu>
+				<li nz-menu-item (click)="action('view')">
+						<i nz-icon nzType="eye"></i>
+						View
+				</li>
 				<li nz-menu-item (click)="action('edit')">
 						<i nz-icon nzType="edit"></i>
 						Edit

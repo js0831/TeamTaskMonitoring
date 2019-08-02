@@ -1,0 +1,15 @@
+.task-view{
+    div:first-child{
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        p{
+            margin: 0;
+        }
+        
+        > *:first-child {
+            flex: 1;
+        }
+    }
+}

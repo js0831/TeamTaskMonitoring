@@ -15,7 +15,6 @@ import { DateSelectionService } from 'src/app/shared/components/date-selection/d
 })
 export class TaskComponent implements OnInit, OnDestroy {
 
-  isShowTaskForm = false;
   currentUser: User;
   userTask: {
     title: string,
@@ -49,7 +48,8 @@ export class TaskComponent implements OnInit, OnDestroy {
       const updateListActions = [
         'TASK_LOAD_FINISH',
         'TASK_ADD_FINISH',
-        'TASK_DELETE_FINISH'
+        'TASK_DELETE_FINISH',
+        'TASK_UPDATE_FINISH'
       ];
       if ( updateListActions.indexOf(state.action) >= 0 ) {
         this.userTask.forEach( (x) => x.data = []);
@@ -79,7 +79,12 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
   selectask(task: Task) {
-    this.selectedTask = task;
+    this.selectedTask = undefined; // CLEAR FIRST TO DESTROY SUBSCRIPTIONS
+
+    setTimeout( () => {
+      this.selectedTask = task;
+      this.taskService.storeSelectUserTask(task);
+    });
   }
 
   ngOnDestroy() {
@@ -90,5 +95,11 @@ export class TaskComponent implements OnInit, OnDestroy {
     const currentDate = new Date(new Date().toDateString());
     const selectedDate = new Date(new Date(this.date).toDateString());
     return currentDate > selectedDate;
+  }
+
+  addTask() {
+    this.taskService.callTaskEvent({
+      action: 'ADD_TASK'
+    });
   }
 }

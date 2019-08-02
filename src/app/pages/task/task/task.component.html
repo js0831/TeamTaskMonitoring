@@ -30,8 +30,7 @@
 									<p class="task__description">{{ut.description}}</p>
 								</div>
 								
-								<app-task-action
-									[task]="ut"
+								<app-task-action 
 									*ngIf="selectedTask && ut._id === selectedTask._id"
 								></app-task-action> 
 							</nz-list-item>        
@@ -46,7 +45,7 @@
 
 	<button 
 		*ngIf="!isPreviousDate()"
-		(click)="isShowTaskForm=true"
+		(click)="addTask()"
 		nz-button 
 		nzType="primary" 
 		nzSize="large" 
@@ -56,10 +55,7 @@
 		<i nz-icon nzType="plus"></i>
 	</button>
 
-	<app-task-form
-		*ngIf="isShowTaskForm"
-		(closed)="isShowTaskForm = false"
-	></app-task-form>
+	<app-task-form></app-task-form>
 
 </app-page>
 

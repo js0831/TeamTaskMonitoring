@@ -1,17 +1,20 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { TaskStatus } from '../task-status.enum';
 import { Task } from '../task.interface';
 import { TaskService } from '../task.service';
 import { NzModalService } from 'ng-zorro-antd';
+import { Subscription } from 'rxjs';
+import { AppState } from 'src/app/shared/app.state';
 
 @Component({
   selector: 'app-task-action',
   templateUrl: './task-action.component.html',
   styleUrls: ['./task-action.component.scss']
 })
-export class TaskActionComponent implements OnInit {
+export class TaskActionComponent implements OnInit, OnDestroy {
 
-  @Input() task: Task;
+  task: Task;
+  subs: Subscription[] = [];
 
   statusList: {
     id: TaskStatus,
@@ -46,13 +49,17 @@ export class TaskActionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.subs[0] = this.taskService.storeSelectTask().subscribe( (x: AppState) => {
+      if (x.action === 'TASK_SELECT') {
+        this.task = x.selectedTask;
+      }
+    });
   }
 
   action(type: string) {
 
     switch (type) {
       case 'delete':
-
         this.modalService.confirm({
           nzTitle: 'Delete Confirmation',
           nzContent: 'Are you sure you want to delete this task?',
@@ -62,10 +69,11 @@ export class TaskActionComponent implements OnInit {
             this.taskService.storeDeleteUserTask(this.task._id);
           }
         });
-
-
         break;
       default:
+        this.taskService.callTaskEvent({
+          action: (`${type}_TASK`.toUpperCase())
+        });
         break;
     }
 
@@ -73,5 +81,9 @@ export class TaskActionComponent implements OnInit {
 
   updateStatus(stat: any) {
     console.log(stat);
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach(x => x.unsubscribe());
   }
 }

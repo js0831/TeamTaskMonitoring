@@ -26,14 +26,15 @@
         padding: .5rem;
         transition: all .1s ease-in;
         min-height: 3rem;
-
+        position: relative;
 
         &.selected{
-            background: #eee;
+            background: rgba(0, 0, 0, 0.5);
             border-radius: .20rem;
 
-            .task{
-                opacity: 0.25;
+            p{
+                color: #fff;
+                opacity: .25;
             }
         }
 
@@ -64,5 +65,6 @@
     app-task-action{
         position: absolute;
         right: .5rem;   
+        top: 0.5rem;
     }
 }

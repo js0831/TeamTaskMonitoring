@@ -37,6 +37,17 @@ export class TaskEffects {
         })
     );
 
+    @Effect() taskUpdate: Observable<Action> = this.actions$.pipe(
+        ofType(actions.TASK_UPDATE),
+        switchMap((action: actions.TaskUpdate) => {
+            return this.taskService.updateTask(action.payload).pipe(
+                map((result) => {
+                    return new actions.TaskUpdateFinish(result);
+                })
+            );
+        })
+    );
+
     @Effect() taskDelete: Observable<Action> = this.actions$.pipe(
         ofType(actions.TASK_DELETE),
         switchMap((action: actions.TaskDelete) => {
