@@ -1,5 +1,5 @@
 .task-view{
-    div:first-child{
+    div:first-child + div{
         display: flex;
         align-items: flex-start;
         justify-content: space-between;

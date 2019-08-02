@@ -32,11 +32,9 @@ export function taskReducer(state = initialAppState, action: actions.Actions) {
             };
 
         case actions.TASK_UPDATE_FINISH:
-
                 const foundIndex = state.task.findIndex( (x: Task) => x._id === payload.data._id);
                 const clone = Object.assign([], state.task);
                 clone[foundIndex] = payload.data;
-
                 return {
                     ...state,
                     action: 'TASK_UPDATE_FINISH',

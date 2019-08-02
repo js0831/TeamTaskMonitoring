@@ -80,13 +80,15 @@ export class TaskFormComponent implements OnInit, OnDestroy {
     let group = {
       id: [],
       title: [],
-      description: []
+      description: [],
+      date: [this.date, Validators.required ]
     };
     if ( this.formType !== 'ADD_TASK' ) {
       group = {
         id: [this.selectedTask._id, Validators.required],
         title: [this.selectedTask.title, Validators.required],
-        description: [this.selectedTask.description]
+        description: [this.selectedTask.description],
+        date: [ this.selectedTask.date, Validators.required ]
       };
     }
     this.form = this.fb.group(group);
@@ -106,7 +108,7 @@ export class TaskFormComponent implements OnInit, OnDestroy {
       description: value.description,
       status: this.formType === 'ADD_TASK' ? 0 : this.selectedTask.status,
       user: LoginService.getCurrentUser().id,
-      date: this.date
+      date: value.date
     };
 
     if ( this.formType === 'ADD_TASK' ) {

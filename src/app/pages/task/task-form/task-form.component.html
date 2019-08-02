@@ -1,12 +1,19 @@
 <nz-modal [nzVisible]="show" [nzTitle]="title" (nzOnCancel)="handleCancel()">
-        <p><strong>Date:</strong> {{date | date : 'MMMM, d yyyy'}}</p>
         
-        <div *ngIf="formType !== 'VIEW_TASK'"> 
+      <div *ngIf="formType !== 'VIEW_TASK'"> 
           <form 
             *ngIf="form"
             [formGroup]="form"
             nz-form
-          >
+          > 
+                <nz-form-item>
+                  <nz-form-control>
+                    <strong>Date: </strong>
+                    <nz-date-picker [nzDisabled]="formType === 'ADD_TASK'" formControlName="date"
+                    ></nz-date-picker>
+                  </nz-form-control>
+                </nz-form-item>
+
                 <nz-form-item>
                     <nz-form-control>
                       <input 
@@ -21,13 +28,16 @@
                     nz-input
                     placeholder="Description"
                     [nzAutosize]="{ minRows: 4, maxRows: 6 }"
-                ></textarea>
+                ></textarea> 
           </form>
         </div>
 
         <div 
           class="task-view"
           *ngIf="formType === 'VIEW_TASK'">
+            <div>
+                <p><strong>Date:</strong> {{date | date : 'MMMM, d yyyy'}}</p>
+            </div>
             <div>
               <p>
                   <strong>Title: </strong>{{selectedTask.title}}
