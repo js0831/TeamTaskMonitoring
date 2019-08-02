@@ -25,15 +25,44 @@
         justify-content: space-between;
         padding: .5rem;
         transition: all .1s ease-in;
+        min-height: 3rem;
+
 
         &.selected{
             background: #eee;
             border-radius: .20rem;
+
+            .task{
+                opacity: 0.25;
+            }
+        }
+
+        .task{ 
+            line-height: 1rem;
+
+            p{
+                margin: 0;
+            }
+
+            &__title{
+                font-weight: 500;
+                color: #333;
+                
+            }
+
+            &__description{
+                font-size: .75rem;
+            }
         }
     }
 
     &__list-container{
         height: calc(100vh - 15rem);
         overflow: auto;
+    }
+
+    app-task-action{
+        position: absolute;
+        right: .5rem;   
     }
 }

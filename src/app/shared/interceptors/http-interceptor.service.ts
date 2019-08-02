@@ -35,7 +35,8 @@ export class HttpInterceptorService implements HttpInterceptor {
     const user = LocalStorageService.get('user') || {token: ''};
     const withTokenRequest = req.clone({
       setHeaders: {
-        Authorization : `Bearer ${user.token}`
+        Authorization : `Bearer ${user.token}`,
+        'Content-Type': 'application/json'
       },
       url: `${environment.apiURL}${req.url}`
     });

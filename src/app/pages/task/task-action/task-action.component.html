@@ -1,68 +1,46 @@
-<ul nz-menu nzMode="horizontal">
-                <!-- <li nz-submenu nzTitle="Action" nzIcon="setting">
-                        <ul>
-                                <li nz-menu-group nzTitle="View" (nzOpenChange)="action('view')"></li>
-                                <li nz-menu-group nzTitle="Edit" (nzOpenChange)="action('edit')"></li>
-                                <li nz-menu-group nzTitle="Delete" (nzOpenChange)="action('delete')"></li>
-                        </ul>
-                </li>
-                <li nz-submenu nzTitle="Update Status" nzIcon="pull-request">
-                        <ul>
-                                <li nz-menu-group nzTitle="On Going"></li>
-                                <li nz-menu-group nzTitle="Done"></li>
-                                <li nz-menu-group nzTitle="On Hold"></li>
-                                <li nz-menu-group nzTitle="Todo"></li>
-                        </ul>
-                </li> -->
-                <nz-button-group>
-                        <button nz-button>Action</button>
-                        <button nzTrigger="click" nz-button nz-dropdown [nzDropdownMenu]="actionMenu" nzPlacement="bottomRight">
-                                <i nz-icon nzType="setting"></i>
-                        </button>
-                </nz-button-group>
-                <nz-divider nzType="vertical"></nz-divider>
-                <nz-button-group>
-                        <button nz-button>Status</button>
-                        <button nzTrigger="click" nz-button nz-dropdown [nzDropdownMenu]="statusMenu" nzPlacement="bottomRight">
-                                <i nz-icon nzType="pull-request"></i>
-                        </button>
-                </nz-button-group>
+ 
+<nz-button-group>
+		<button nz-button>Action</button>
+		<button nzTrigger="click" nz-button nz-dropdown [nzDropdownMenu]="actionMenu" nzPlacement="bottomRight">
+				<i nz-icon nzType="setting"></i>
+		</button>
+</nz-button-group>
 
-                <nz-dropdown-menu #actionMenu="nzDropdownMenu">
-                        <ul nz-menu>
-                                <li nz-menu-item (click)="action('view')">
-                                        <i nz-icon nzType="eye"></i>
-                                        View
-                                </li>
-                                <li nz-menu-item (click)="action('edit')">
-                                        <i nz-icon nzType="edit"></i>
-                                        Edit
-                                </li>
-                                <li nz-menu-item (click)="action('delete')">
-                                        <i nz-icon nzType="delete"></i>
-                                        Delete
-                                </li>
-                        </ul>
-                </nz-dropdown-menu>
+<nz-divider nzType="vertical"></nz-divider>
 
-                <nz-dropdown-menu #statusMenu="nzDropdownMenu">
-                        <ul nz-menu>
-                                <li nz-menu-item (click)="status(0)">
-                                        <i nz-icon nzType="tool"></i>
-                                        Todo
-                                </li>
-                                <li nz-menu-item (click)="status(1)">
-                                        <i nz-icon nzType="sync" nzSpin="true"></i>
-                                        On Going
-                                </li>
-                                <li nz-menu-item (click)="status(2)">
-                                        <i nz-icon nzType="check-circle"></i>
-                                        Done
-                                </li>
-                                <li nz-menu-item (click)="status(3)">
-                                        <i nz-icon nzType="pause-circle"></i>
-                                        On Hold
-                                </li>                               
-                        </ul>
-                </nz-dropdown-menu>
-</ul>
+<nz-button-group>
+		<button nz-button>Status</button>
+		<button nzTrigger="click" nz-button nz-dropdown [nzDropdownMenu]="statusMenu" nzPlacement="bottomRight">
+				<i nz-icon nzType="pull-request"></i>
+		</button>
+</nz-button-group>
+
+<nz-dropdown-menu #actionMenu="nzDropdownMenu">
+		<ul nz-menu>
+				<li nz-menu-item (click)="action('edit')">
+						<i nz-icon nzType="edit"></i>
+						Edit
+				</li>
+				<li nz-menu-item (click)="action('delete')">
+						<i nz-icon nzType="delete"></i>
+						Delete
+				</li>
+		</ul>
+</nz-dropdown-menu>
+
+<nz-dropdown-menu #statusMenu="nzDropdownMenu">
+		<ul nz-menu>
+				<ng-container *ngFor="let stat of statusList">
+					<li 
+						*ngIf="task && stat.id != task.status"
+						nz-menu-item 
+						(click)="updateStatus(stat)"
+					>
+							<i nz-icon [nzSpin]="stat.icon === 'sync'" [nzType]="stat.icon"></i>
+							{{stat.label}}
+					</li>      
+				</ng-container>               
+		</ul>
+</nz-dropdown-menu>
+
+ 

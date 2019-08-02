@@ -29,6 +29,15 @@ export function taskReducer(state = initialAppState, action: actions.Actions) {
                 status: payload.status,
                 message: payload.message
             };
+
+        case actions.TASK_DELETE_FINISH:
+            return {
+                ...state,
+                action: 'TASK_DELETE_FINISH',
+                task: [...state.task.filter( x => x._id !== payload.id)],
+                status: payload.status,
+                message: payload.message
+            };
         default:
             return{
                 ...state,

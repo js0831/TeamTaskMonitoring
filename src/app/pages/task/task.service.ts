@@ -29,6 +29,10 @@ export class TaskService {
     this.store.dispatch(new actions.TaskAdd(task));
   }
 
+  storeDeleteUserTask(id: string) {
+    this.store.dispatch(new actions.TaskDelete(id));
+  }
+
   storeActionClear() {
     this.store.dispatch(new actions.Clear());
   }
@@ -40,5 +44,9 @@ export class TaskService {
 
   addTask(task: Task) {
     return this.http.post('task', task);
+  }
+
+  deleteTask(id: string) {
+    return this.http.delete(`task/${id}`);
   }
 }

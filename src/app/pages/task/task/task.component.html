@@ -24,9 +24,14 @@
 								[ngClass]="{'selected' : selectedTask && ut._id === selectedTask._id}"
 								(click)="selectask(ut)"
 								*ngFor="let ut of u.data">
-								{{ut.title}} 
+								
+								<div class="task">
+									<p class="task__title">{{ut.title}}</p>
+									<p class="task__description">{{ut.description}}</p>
+								</div>
 								
 								<app-task-action
+									[task]="ut"
 									*ngIf="selectedTask && ut._id === selectedTask._id"
 								></app-task-action> 
 							</nz-list-item>        

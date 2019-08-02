@@ -37,4 +37,18 @@ export class TaskEffects {
         })
     );
 
+    @Effect() taskDelete: Observable<Action> = this.actions$.pipe(
+        ofType(actions.TASK_DELETE),
+        switchMap((action: actions.TaskDelete) => {
+            return this.taskService.deleteTask(action.payload).pipe(
+                map((result) => {
+                    return new actions.TaskDeleteFinish({
+                        ...result,
+                        id: action.payload
+                    });
+                })
+            );
+        })
+    );
+
 }

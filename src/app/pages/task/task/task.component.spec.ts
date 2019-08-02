@@ -256,9 +256,7 @@ describe('TaskComponent', () => {
 
 
 
-  // it('should update the view when the task is deleted', () => {
-  //   expect(false).toBeTruthy();
-  // });
+
 
   // it('should update the view when new task is added', () => {
   //   expect(false).toBeTruthy();

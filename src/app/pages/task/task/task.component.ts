@@ -46,10 +46,12 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   private loadSubscriptions() {
     this.subs[0] = this.taskService.storeSelectTask().subscribe((state: AppState) => {
-      if (
-        state.action === 'TASK_LOAD_FINISH' ||
-        state.action === 'TASK_ADD_FINISH'
-      ) {
+      const updateListActions = [
+        'TASK_LOAD_FINISH',
+        'TASK_ADD_FINISH',
+        'TASK_DELETE_FINISH'
+      ];
+      if ( updateListActions.indexOf(state.action) >= 0 ) {
         this.userTask.forEach( (x) => x.data = []);
         state.task.forEach( (x: Task) => {
           // tslint:disable-next-line: radix
