@@ -20,23 +20,24 @@
 
 				<div class="task__list-container">
 					<nz-list nzSize="small">  
-							<nz-list-item 
-								[ngClass]="{'selected' : selectedTask && ut._id === selectedTask._id}"
-								(click)="selectask(ut)"
-								*ngFor="let ut of u.data">
-								
-								<div class="task">
-									<p class="task__title">{{ut.title}}</p>
-									<p class="task__description">{{ut.description}}</p>
-								</div>
-								
-								<app-task-action 
-									*ngIf="selectedTask && ut._id === selectedTask._id"
-								></app-task-action> 
-							</nz-list-item>        
-
+							<ng-container *ngFor="let ut of u.data">
+									<nz-list-item 
+										*ngIf="isSameDate(ut.date)"
+										[ngClass]="{'selected' : selectedTask && ut._id === selectedTask._id}"
+										(click)="selectask(ut)"
+									>
+									
+									<div class="task">
+										<p class="task__title">{{ut.title}}</p>
+										<p class="task__description">{{ut.description}}</p>
+									</div> 
+									
+									<app-task-action 
+										*ngIf="selectedTask && ut._id === selectedTask._id"
+									></app-task-action> 
+								</nz-list-item>
+							</ng-container>
 					</nz-list>
-
 					<nz-empty *ngIf="u.data.length === 0"></nz-empty>
 				</div> 
 			</nz-tab> 

@@ -102,4 +102,8 @@ export class TaskComponent implements OnInit, OnDestroy {
       action: 'ADD_TASK'
     });
   }
+
+  isSameDate(d1) {
+    return new Date(d1).setHours(0, 0, 0, 0) === new Date(this.date).setHours(0, 0, 0, 0);
+  }
 }
