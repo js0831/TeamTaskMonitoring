@@ -80,7 +80,8 @@ export class TaskActionComponent implements OnInit, OnDestroy {
   }
 
   updateStatus(stat: any) {
-    console.log(stat);
+    this.task.status = stat.id;
+    this.taskService.storeUpdateUserTask(this.task);
   }
 
   ngOnDestroy(): void {
