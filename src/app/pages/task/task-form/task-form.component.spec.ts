@@ -13,7 +13,7 @@ import { DebugElement } from '@angular/core';
 import { By } from 'protractor';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 
-fdescribe('TaskFormComponent', () => {
+describe('TaskFormComponent', () => {
   let component: TaskFormComponent;
   let fixture: ComponentFixture<TaskFormComponent>;
   let dateSelectionService: DateSelectionService;
