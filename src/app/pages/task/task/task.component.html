@@ -22,7 +22,6 @@
 					<nz-list nzSize="small">  
 							<ng-container *ngFor="let ut of u.data">
 									<nz-list-item 
-										*ngIf="isSameDate(ut.date)"
 										[ngClass]="{'selected' : selectedTask && ut._id === selectedTask._id}"
 										(click)="selectask(ut)"
 									>

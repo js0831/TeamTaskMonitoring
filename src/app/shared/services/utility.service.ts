@@ -8,6 +8,12 @@ export class UtilityService {
 
   constructor() { }
 
+  static getDateDifference(dateA: any, dateB: any) {
+    const a = new Date(dateA).setHours(0, 0, 0, 0);
+    const b = new Date(dateB).setHours(0, 0, 0, 0);
+    return a - b;
+  }
+
   markFormControlsDirty(form: FormGroup) {
     // tslint:disable-next-line: forin
     for (const i in form.controls) {

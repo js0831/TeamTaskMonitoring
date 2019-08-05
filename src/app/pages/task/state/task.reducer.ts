@@ -3,6 +3,7 @@ import * as actions from './task.actions';
 import { AppState } from 'src/app/shared/app.state';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 import { Task } from '../task.interface';
+import { UtilityService } from 'src/app/shared/services/utility.service';
 
 const initialAppState: AppState = {
     action: 'initial',
@@ -34,11 +35,14 @@ export function taskReducer(state = initialAppState, action: actions.Actions) {
         case actions.TASK_UPDATE_FINISH:
                 const foundIndex = state.task.findIndex( (x: Task) => x._id === payload.data._id);
                 const clone = Object.assign([], state.task);
+                const isSameDate = UtilityService.getDateDifference(payload.data.date, clone[foundIndex].date) === 0;
                 clone[foundIndex] = payload.data;
+                const finalState = isSameDate ? clone : [...state.task.filter( x => x._id !== payload.data._id)];
+
                 return {
                     ...state,
                     action: 'TASK_UPDATE_FINISH',
-                    task: clone,
+                    task: finalState,
                     status: payload.status,
                     message: payload.message
                 };
