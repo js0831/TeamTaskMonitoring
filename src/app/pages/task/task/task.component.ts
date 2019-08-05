@@ -65,6 +65,7 @@ export class TaskComponent implements OnInit, OnDestroy {
           }, 500);
           this.taskService.storeActionClear();
         }
+        this.selectask(undefined);
       }
     });
     this.subs[1] = this.dateSelectionService.storeSelectDate().subscribe( (x: AppState) => {
