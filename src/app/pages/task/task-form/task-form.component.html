@@ -56,11 +56,11 @@
         <div *nzModalFooter>
           <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
           <button 
+            class="submit-task-form"
             *ngIf="formType !== 'VIEW_TASK'"
             nz-button 
             nzType="primary" 
-            (click)="submit()"> {{formType === 'ADD_TASK' ? 'SAVE' : 'UPDATE'}}
-          </button>
+            (click)="submit()">{{formType === 'ADD_TASK' ? 'SAVE' : 'UPDATE'}}</button>
         </div>
 
 </nz-modal>

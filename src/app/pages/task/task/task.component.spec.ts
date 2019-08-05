@@ -41,6 +41,7 @@ import { DateSelectionService } from 'src/app/shared/components/date-selection/d
 
 describe('TaskComponent', () => {
   let component: TaskComponent;
+
   let fixture: ComponentFixture<TaskComponent>;
   let loginService: LoginService;
   let pageService: PageService;
@@ -127,6 +128,7 @@ describe('TaskComponent', () => {
       }
     }));
 
+    spyOn(taskService, 'storeSelectUserTask');
     spyOn(pageService, 'pageChanged');
     spyOn(dateSelectionService, 'storeChangeDate');
     spyOn(dateSelectionService, 'storeSelectDate').and.returnValue(of({
@@ -183,7 +185,6 @@ describe('TaskComponent', () => {
         ]
       }
     ));
-
     fixture.detectChanges();
   });
 

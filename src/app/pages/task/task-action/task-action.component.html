@@ -10,7 +10,9 @@
 
 <nz-button-group>
 		<button nz-button>Status</button>
-		<button nzTrigger="click" nz-button nz-dropdown [nzDropdownMenu]="statusMenu" nzPlacement="bottomRight">
+		<button 
+				class="status-menu-trigger"
+				nzTrigger="click" nz-button nz-dropdown [nzDropdownMenu]="statusMenu" nzPlacement="bottomRight">
 				<i nz-icon nzType="pull-request"></i>
 		</button>
 </nz-button-group>
@@ -33,9 +35,10 @@
 </nz-dropdown-menu>
 
 <nz-dropdown-menu #statusMenu="nzDropdownMenu">
-		<ul nz-menu>
+		<ul nz-menu class="status-update-selection">
 				<ng-container *ngFor="let stat of statusList">
 					<li 
+						class="test"
 						*ngIf="task && stat.id != task.status"
 						nz-menu-item 
 						(click)="updateStatus(stat)"

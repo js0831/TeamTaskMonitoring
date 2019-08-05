@@ -65,7 +65,7 @@ export class TaskComponent implements OnInit, OnDestroy {
           }, 500);
           this.taskService.storeActionClear();
         }
-        this.selectask(undefined);
+        this.selectedTask = undefined;
       }
     });
     this.subs[1] = this.dateSelectionService.storeSelectDate().subscribe( (x: AppState) => {
@@ -102,9 +102,5 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.taskService.callTaskEvent({
       action: 'ADD_TASK'
     });
-  }
-
-  isSameDate(d1) {
-    return new Date(d1).setHours(0, 0, 0, 0) === new Date(this.date).setHours(0, 0, 0, 0);
   }
 }
