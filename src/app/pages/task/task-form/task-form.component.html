@@ -9,7 +9,9 @@
                 <nz-form-item>
                   <nz-form-control>
                     <strong>Date: </strong>
-                    <nz-date-picker [nzDisabled]="formType === 'ADD_TASK'" formControlName="date"
+                    <nz-date-picker 
+                      [nzDisabledDate]="disabledDate"
+                      formControlName="date"
                     ></nz-date-picker>
                   </nz-form-control>
                 </nz-form-item>

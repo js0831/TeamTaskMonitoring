@@ -123,4 +123,11 @@ export class TaskFormComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subs.forEach(x => x.unsubscribe());
   }
+
+  disabledDate = (current: Date): boolean => {
+    const a = new Date().setHours(0, 0, 0, 0);
+    const b = current.setHours(0, 0, 0, 0);
+    return a > b;
+  }
+
 }
